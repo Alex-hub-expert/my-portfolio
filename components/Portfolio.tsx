@@ -412,6 +412,102 @@ const TrustBadges = () => {
   );
 };
 
+const BrandSection = () => {
+  const brands = [
+    "COSORI", "pawsync", "REUZEL", "KNOSS", "mosqitter", "nani", "FASCO", "LOST COAST", "PAINTLIFE", "SPEEDGEAR", "BLUEBIRD", "NANI", "KNOSS", "COSORI", "pawsync"
+  ];
+
+  // Duplicate brands for seamless loop
+  const duplicatedBrands = [...brands, ...brands, ...brands];
+
+  return (
+    <section className="py-32 bg-white overflow-hidden relative">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-black leading-tight tracking-tight max-w-xl">
+            Trusted by <br />
+            <span className="text-gray-400 italic">Dreamers, Doers,</span> <br />
+            and Leaders
+          </h2>
+        </motion.div>
+      </div>
+
+      {/* Isometric Marquee Container */}
+      <div className="relative h-[500px] md:h-[600px] -mt-20 md:-mt-40 pointer-events-none">
+        <div 
+          className="absolute top-0 left-0 w-[200%] h-full flex flex-col gap-6"
+          style={{
+            transform: "rotateX(45deg) rotateZ(-20deg) skewX(10deg) translateY(-100px)",
+            transformStyle: "preserve-3d"
+          }}
+        >
+          {/* Row 1: Left to Right */}
+          <div className="flex gap-6 whitespace-nowrap">
+            <motion.div
+              animate={{ x: [0, -1000] }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              className="flex gap-6"
+            >
+              {duplicatedBrands.map((brand, i) => (
+                <div 
+                  key={i} 
+                  className="w-48 h-24 bg-white border border-gray-100 rounded-2xl shadow-sm flex items-center justify-center px-8 transition-all hover:shadow-xl hover:border-blue-500/20"
+                >
+                  <span className="text-black font-black tracking-tighter text-xl opacity-80">{brand}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Row 2: Right to Left */}
+          <div className="flex gap-6 whitespace-nowrap ml-[-500px]">
+            <motion.div
+              animate={{ x: [-1000, 0] }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              className="flex gap-6"
+            >
+              {duplicatedBrands.map((brand, i) => (
+                <div 
+                  key={i} 
+                  className="w-48 h-24 bg-white border border-gray-100 rounded-2xl shadow-sm flex items-center justify-center px-8 transition-all hover:shadow-xl hover:border-blue-500/20"
+                >
+                  <span className="text-black font-black tracking-tighter text-xl opacity-80">{brand}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Row 3: Left to Right (Faster) */}
+          <div className="flex gap-6 whitespace-nowrap ml-[-200px]">
+            <motion.div
+              animate={{ x: [0, -1000] }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              className="flex gap-6"
+            >
+              {duplicatedBrands.map((brand, i) => (
+                <div 
+                  key={i} 
+                  className="w-48 h-24 bg-white border border-gray-100 rounded-2xl shadow-sm flex items-center justify-center px-8 transition-all hover:shadow-xl hover:border-blue-500/20"
+                >
+                  <span className="text-black font-black tracking-tighter text-xl opacity-80">{brand}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Gradient Overlay for transition back to dark */}
+      <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-black to-transparent z-20" />
+    </section>
+  );
+};
+
 const About = () => {
   const skills = [
     'Liquid', 'JavaScript', 'HTML5', 'CSS3', 'JSON', 'Technical SEO', 'CRO', 'API Integration'
@@ -968,6 +1064,7 @@ export default function Portfolio() {
       <Navbar />
       <Hero />
       <TrustBadges />
+      <BrandSection />
       <About />
       <Services />
       <Projects />
