@@ -2,6 +2,9 @@
 
 import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { 
   Mail, 
@@ -21,7 +24,9 @@ import {
   Zap,
   ShieldCheck,
   RefreshCw,
-  BarChart3
+  BarChart3,
+  Eye,
+  ThumbsUp
 } from 'lucide-react';
 
 // --- Components ---
@@ -502,10 +507,14 @@ const Projects = () => {
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.1,
+                ease: [0.21, 0.47, 0.32, 0.98]
+              }}
               className="group cursor-pointer"
             >
               <div className="relative aspect-4/3 overflow-hidden rounded-3xl mb-6 bg-[#1a1a1a]">
@@ -513,27 +522,46 @@ const Projects = () => {
                   src={project.image} 
                   alt={project.title} 
                   fill
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6">
-                  <div className="flex items-center gap-2 text-white font-bold">
-                    <Star size={20} className="fill-white" />
-                    {project.appreciations}
-                  </div>
-                  <div className="flex items-center gap-2 text-white font-bold">
-                    <ExternalLink size={20} />
-                    View Case Study
-                  </div>
+                
+                {/* Behance-style Overlay */}
+                <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px] flex flex-col items-center justify-center">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileHover={{ opacity: 1, scale: 1 }}
+                    className="flex gap-6"
+                  >
+                    <div className="flex flex-col items-center gap-2 text-white">
+                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                        <Eye size={20} />
+                      </div>
+                      <span className="text-xs font-bold uppercase tracking-widest">{project.views}</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 text-white">
+                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                        <ThumbsUp size={20} />
+                      </div>
+                      <span className="text-xs font-bold uppercase tracking-widest">{project.appreciations}</span>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    whileHover={{ opacity: 1, y: 0 }}
+                    className="absolute bottom-8"
+                  >
+                    <span className="px-6 py-2 bg-white text-black rounded-full text-sm font-bold flex items-center gap-2">
+                      View Project <ExternalLink size={14} />
+                    </span>
+                  </motion.div>
                 </div>
               </div>
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start px-2">
                 <div>
-                  <h3 className="text-2xl font-bold mb-1 group-hover:text-blue-500 transition-colors">{project.title}</h3>
-                  <p className="text-gray-500 font-medium">{project.category}</p>
-                </div>
-                <div className="text-sm text-gray-600 font-bold flex items-center gap-1">
-                  {project.views} views
+                  <h3 className="text-2xl font-display font-bold mb-1 group-hover:text-blue-500 transition-colors">{project.title}</h3>
+                  <p className="text-gray-500 font-medium text-sm uppercase tracking-wider">{project.category}</p>
                 </div>
               </div>
             </motion.div>
@@ -606,7 +634,38 @@ const Testimonials = () => {
   );
 };
 
+const contactSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  projectType: z.string(),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+});
+
+type ContactFormValues = z.infer<typeof contactSchema>;
+
 const Contact = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      projectType: "Shopify Development",
+    },
+  });
+
+  const onSubmit = async (data: ContactFormValues) => {
+    // Simulate API call
+    console.log('Form data:', data);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsSubmitted(true);
+    reset();
+    setTimeout(() => setIsSubmitted(false), 5000);
+  };
+
   return (
     <section id="contact" className="py-24 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
@@ -653,35 +712,113 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-white p-8 md:p-10 rounded-3xl shadow-2xl">
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-900">Name</label>
-                    <input type="text" className="w-full px-4 py-3 bg-gray-100 border-none rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-600 outline-hidden" placeholder="John Doe" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-900">Email</label>
-                    <input type="email" className="w-full px-4 py-3 bg-gray-100 border-none rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-600 outline-hidden" placeholder="john@example.com" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-900">Project Type</label>
-                  <select className="w-full px-4 py-3 bg-gray-100 border-none rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-600 outline-hidden">
-                    <option>Shopify Development</option>
-                    <option>CRO Audit</option>
-                    <option>Store Migration</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-900">Message</label>
-                  <textarea rows={4} className="w-full px-4 py-3 bg-gray-100 border-none rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-600 outline-hidden" placeholder="Tell me about your store goals..."></textarea>
-                </div>
-                <button className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition-all">
-                  Send Message
-                </button>
-              </form>
+            <div className="bg-white p-8 md:p-10 rounded-3xl shadow-2xl relative">
+              <AnimatePresence mode="wait">
+                {isSubmitted ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="flex flex-col items-center justify-center text-center py-12"
+                  >
+                    <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
+                      <CheckCircle2 size={40} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+                    <p className="text-gray-600">
+                      Thank you for reaching out. Alex will get back to you shortly.
+                    </p>
+                    <button
+                      onClick={() => setIsSubmitted(false)}
+                      className="mt-8 text-blue-600 font-bold hover:underline"
+                    >
+                      Send another message
+                    </button>
+                  </motion.div>
+                ) : (
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="space-y-6"
+                    onSubmit={handleSubmit(onSubmit)}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-gray-900">Name</label>
+                        <input
+                          {...register('name')}
+                          type="text"
+                          className={`w-full px-4 py-3 bg-gray-100 border-2 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-600 outline-hidden transition-all ${
+                            errors.name ? 'border-red-500 bg-red-50' : 'border-transparent'
+                          }`}
+                          placeholder="John Doe"
+                        />
+                        {errors.name && (
+                          <p className="text-xs font-bold text-red-500 mt-1">{errors.name.message}</p>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-gray-900">Email</label>
+                        <input
+                          {...register('email')}
+                          type="email"
+                          className={`w-full px-4 py-3 bg-gray-100 border-2 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-600 outline-hidden transition-all ${
+                            errors.email ? 'border-red-500 bg-red-50' : 'border-transparent'
+                          }`}
+                          placeholder="john@example.com"
+                        />
+                        {errors.email && (
+                          <p className="text-xs font-bold text-red-500 mt-1">{errors.email.message}</p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-gray-900">Project Type</label>
+                      <select
+                        {...register('projectType')}
+                        className="w-full px-4 py-3 bg-gray-100 border-2 border-transparent rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-600 outline-hidden"
+                      >
+                        <option>Shopify Development</option>
+                        <option>CRO Audit</option>
+                        <option>Store Migration</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-gray-900">Message</label>
+                      <textarea
+                        {...register('message')}
+                        rows={4}
+                        className={`w-full px-4 py-3 bg-gray-100 border-2 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-600 outline-hidden transition-all ${
+                          errors.message ? 'border-red-500 bg-red-50' : 'border-transparent'
+                        }`}
+                        placeholder="Tell me about your store goals..."
+                      ></textarea>
+                      {errors.message && (
+                        <p className="text-xs font-bold text-red-500 mt-1">{errors.message.message}</p>
+                      )}
+                    </div>
+                    <button
+                      disabled={isSubmitting}
+                      className={`w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 ${
+                        isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                      }`}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <RefreshCw className="animate-spin" size={20} />
+                          Sending...
+                        </>
+                      ) : (
+                        'Send Message'
+                      )}
+                    </button>
+                  </motion.form>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
