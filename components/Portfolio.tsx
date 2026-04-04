@@ -26,7 +26,9 @@ import {
   RefreshCw,
   BarChart3,
   Eye,
-  ThumbsUp
+  ThumbsUp,
+  Trophy,
+  Medal
 } from 'lucide-react';
 
 // --- Components ---
@@ -248,18 +250,18 @@ const Hero = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="absolute top-0 right-0 w-[380px] aspect-[9/16] rounded-3xl overflow-hidden border border-white/10 shadow-2xl z-10 bg-[#1a1a1a]"
+            className="absolute top-0 right-0 w-[280px] aspect-[9/19] rounded-[3rem] overflow-hidden border-[8px] border-[#1a1a1a] shadow-2xl z-10 bg-[#0a0a0a]"
           >
-            <div className="absolute top-0 left-0 w-full h-6 bg-white/5 border-b border-white/10 flex items-center px-3 gap-1 z-20">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-500/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
+            {/* Mobile Notch */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#1a1a1a] rounded-b-2xl z-30 flex items-center justify-center gap-1.5">
+              <div className="w-1 h-1 rounded-full bg-white/10" />
+              <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/shopify-fashion/800/1400" 
-              alt="Shopify Fashion Store" 
+              src="https://picsum.photos/seed/skincare-app/800/1600" 
+              alt="Shopify Skincare Store" 
               fill
-              className="object-cover grayscale hover:grayscale-0 transition-all duration-700 pt-6"
+              className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
               referrerPolicy="no-referrer"
             />
           </motion.div>
@@ -268,18 +270,18 @@ const Hero = () => {
             initial={{ opacity: 0, x: 50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="absolute top-32 -right-16 w-[420px] aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl z-20 bg-[#1a1a1a]"
+            className="absolute top-20 -right-24 w-[280px] aspect-[9/19] rounded-[3rem] overflow-hidden border-[8px] border-[#1a1a1a] shadow-2xl z-20 bg-[#0a0a0a]"
           >
-            <div className="absolute top-0 left-0 w-full h-6 bg-white/5 border-b border-white/10 flex items-center px-3 gap-1 z-20">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-500/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
+            {/* Mobile Notch */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#1a1a1a] rounded-b-2xl z-30 flex items-center justify-center gap-1.5">
+              <div className="w-1 h-1 rounded-full bg-white/10" />
+              <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/shopify-tech/800/600" 
-              alt="Shopify Tech Store" 
+              src="https://picsum.photos/seed/food-app/800/1600" 
+              alt="Shopify Food Store" 
               fill
-              className="object-cover pt-6"
+              className="object-cover"
               referrerPolicy="no-referrer"
             />
           </motion.div>
@@ -288,21 +290,122 @@ const Hero = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7 }}
-            className="absolute bottom-4 right-12 w-[320px] aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl z-30 bg-[#1a1a1a]"
+            className="absolute bottom-0 right-16 w-[280px] aspect-[9/19] rounded-[3rem] overflow-hidden border-[8px] border-[#1a1a1a] shadow-2xl z-30 bg-[#0a0a0a]"
           >
-            <div className="absolute top-0 left-0 w-full h-6 bg-white/5 border-b border-white/10 flex items-center px-3 gap-1 z-20">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-500/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
+            {/* Mobile Notch */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#1a1a1a] rounded-b-2xl z-30 flex items-center justify-center gap-1.5">
+              <div className="w-1 h-1 rounded-full bg-white/10" />
+              <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/shopify-minimal/800/800" 
-              alt="Shopify Minimal Store" 
+              src="https://picsum.photos/seed/plant-app/800/1600" 
+              alt="Shopify Plant Store" 
               fill
-              className="object-cover pt-6"
+              className="object-cover"
               referrerPolicy="no-referrer"
             />
           </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const TrustBadges = () => {
+  const badges = [
+    {
+      platform: "shopify",
+      rating: "Highest-Rated With 5/5 Star On",
+      icon: <Star className="text-yellow-400 fill-yellow-400" size={20} />,
+      logo: (
+        <div className="flex items-center gap-2">
+          <ShoppingBag size={28} className="text-white" />
+          <span className="text-3xl font-bold tracking-tight">shopify</span>
+        </div>
+      )
+    },
+    {
+      platform: "Clutch",
+      rating: "Top-Rated With 325+ Reviews On",
+      icon: <Trophy className="text-orange-400" size={20} />,
+      logo: <span className="text-3xl font-bold tracking-tight">Clutch<span className="text-red-500">.</span></span>
+    },
+    {
+      platform: "GoodFirms",
+      rating: "Perfect 5.0 Score On",
+      icon: <Medal className="text-blue-400" size={20} />,
+      logo: (
+        <div className="flex items-center gap-1">
+          <div className="w-7 h-7 bg-blue-500 rounded flex items-center justify-center font-black text-[12px]">F</div>
+          <span className="text-3xl font-bold tracking-tight">GoodFirms</span>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-black overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mb-20">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-5 shrink-0"
+          >
+            <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-2xl shadow-white/10">
+              <ShoppingBag className="text-black" size={40} />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-2xl font-black tracking-[0.2em] leading-none text-white">SHOPIFY</span>
+              <span className="text-2xl font-black tracking-[0.2em] leading-none text-white">PLATINUM</span>
+              <span className="text-2xl font-black tracking-[0.2em] leading-none text-white">PARTNER</span>
+            </div>
+          </motion.div>
+          
+          <div className="hidden md:block w-px h-20 bg-white/10 mx-4" />
+          
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-3xl md:text-5xl font-display font-bold max-w-3xl leading-[1.1] tracking-tight"
+          >
+            Proud Shopify Plus Solutions Agency, <br />
+            <span className="text-gray-500">Empowering Global Businesses</span>
+          </motion.h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {badges.map((badge, index) => (
+            <motion.div
+              key={badge.platform}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 + (index * 0.1) }}
+              whileHover={{ 
+                y: -10,
+                backgroundColor: "rgba(255, 255, 255, 0.02)",
+                borderColor: "rgba(59, 130, 246, 0.4)"
+              }}
+              className="group relative p-12 rounded-[40px] border border-white/5 bg-[#0a0a0a] flex flex-col items-center justify-center text-center transition-all duration-500 cursor-default"
+            >
+              {/* Subtle Glow Effect */}
+              <div className="absolute inset-0 rounded-[40px] bg-blue-500/0 group-hover:bg-blue-500/5 transition-all duration-500 blur-2xl" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-8 text-gray-500 group-hover:text-white transition-colors duration-300">
+                  {badge.icon}
+                  <span className="text-xs font-black uppercase tracking-[0.15em]">{badge.rating}</span>
+                </div>
+                <div className="group-hover:scale-110 transition-transform duration-500 ease-out">
+                  {badge.logo}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -864,6 +967,7 @@ export default function Portfolio() {
     <main className="relative">
       <Navbar />
       <Hero />
+      <TrustBadges />
       <About />
       <Services />
       <Projects />
