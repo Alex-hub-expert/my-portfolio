@@ -28,7 +28,12 @@ import {
   Eye,
   ThumbsUp,
   Trophy,
-  Medal
+  Medal,
+  Megaphone,
+  Search,
+  Truck,
+  Target,
+  Headphones
 } from 'lucide-react';
 
 // --- Components ---
@@ -434,6 +439,27 @@ const BrandSection = () => {
             <span className="text-gray-400 italic">Dreamers, Doers,</span> <br />
             and Leaders
           </h2>
+
+          {/* New Horizontal Logo Row */}
+          <div className="mt-12 overflow-hidden relative">
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-linear-to-r from-white to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-linear-to-l from-white to-transparent z-10" />
+            
+            <motion.div 
+              animate={{ x: [0, -1000] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="flex gap-12 items-center whitespace-nowrap py-4"
+            >
+              {[...brands, ...brands].map((brand, i) => (
+                <div 
+                  key={i} 
+                  className="text-2xl font-black text-black/20 hover:text-blue-600 hover:scale-110 transition-all duration-300 cursor-default tracking-tighter"
+                >
+                  {brand}
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 
@@ -505,6 +531,85 @@ const BrandSection = () => {
       {/* Bottom Gradient Overlay for transition back to dark */}
       <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-black to-transparent z-20" />
     </section>
+  );
+};
+
+const SocialProofStrip = () => {
+  const stats = [
+    { 
+      label: "Stores Worked With", 
+      value: 50, 
+      suffix: "+",
+      icon: <ShoppingBag size={20} className="text-blue-500" />,
+      detail: "From startups to enterprise"
+    },
+    { 
+      label: "Proven Sales Growth", 
+      value: 100, 
+      suffix: "%",
+      icon: <BarChart3 size={20} className="text-emerald-500" />,
+      detail: "Average client revenue boost"
+    },
+    { 
+      label: "Optimization Expert", 
+      value: 99, 
+      suffix: "/100",
+      icon: <Zap size={20} className="text-yellow-500" />,
+      detail: "Lighthouse performance score"
+    }
+  ];
+
+  return (
+    <div className="relative z-30 -mt-12 max-w-5xl mx-auto px-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="bg-black/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-1 md:p-2 shadow-2xl shadow-blue-500/10"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-2">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.03)" }}
+              className="relative group px-8 py-6 rounded-2xl transition-all duration-300 overflow-hidden"
+            >
+              {/* Animated Glow on Hover */}
+              <div className="absolute inset-0 bg-linear-to-br from-blue-500/0 via-transparent to-blue-500/0 group-hover:from-blue-500/5 group-hover:to-blue-500/5 transition-all duration-500" />
+              
+              <div className="relative z-10 flex items-center gap-5">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                  {stat.icon}
+                </div>
+                <div>
+                  <div className="flex items-baseline gap-1">
+                    <motion.span 
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      className="text-2xl font-black text-white"
+                    >
+                      {stat.value}{stat.suffix}
+                    </motion.span>
+                  </div>
+                  <div className="text-xs font-black uppercase tracking-widest text-gray-400 group-hover:text-blue-400 transition-colors">
+                    {stat.label}
+                  </div>
+                </div>
+              </div>
+
+              {/* Tooltip-like detail on hover */}
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                whileHover={{ opacity: 1, y: 0 }}
+                className="absolute bottom-2 left-8 text-[10px] font-bold text-gray-600 pointer-events-none"
+              >
+                {stat.detail}
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
@@ -583,70 +688,89 @@ const About = () => {
 const Services = () => {
   const services = [
     {
-      title: "Shopify Development",
-      description: "Custom theme development from scratch or feature-rich store setups using Liquid and modern JS frameworks.",
-      icon: <ShoppingBag size={32} />,
+      title: "Shopify Store Setup & Management",
+      description: "End-to-end Shopify solutions, from initial configuration to daily operational management and scaling.",
+      icon: <ShoppingBag size={28} />,
       color: "bg-blue-600"
     },
     {
-      title: "Conversion Rate Optimization",
-      description: "Data-driven UI/UX audits and implementation to turn your existing traffic into high-value customers.",
-      icon: <BarChart3 size={32} />,
-      color: "bg-indigo-600"
+      title: "Social Media Advertising",
+      description: "High-ROI ad campaigns across Meta, TikTok, and Google to drive targeted traffic to your storefront.",
+      icon: <Megaphone size={28} />,
+      color: "bg-pink-600"
     },
     {
-      title: "Store Migration",
-      description: "Seamlessly moving your data, SEO rankings, and customer base from WooCommerce, Magento, or BigCommerce to Shopify.",
-      icon: <RefreshCw size={32} />,
-      color: "bg-purple-600"
-    },
-    {
-      title: "Performance Engineering",
-      description: "Speed optimization that actually works. Improving Core Web Vitals to boost SEO and user retention.",
-      icon: <Zap size={32} />,
+      title: "SEO Optimization",
+      description: "Technical and on-page SEO strategies to improve your organic rankings and search visibility.",
+      icon: <Search size={28} />,
       color: "bg-emerald-600"
     },
     {
-      title: "E-commerce Compliance",
-      description: "Ensuring your store meets all legal and accessibility standards (ADA, GDPR) to protect your business.",
-      icon: <ShieldCheck size={32} />,
+      title: "Product Page Optimization (CRO)",
+      description: "Optimizing product descriptions, images, and layouts to maximize conversion rates and average order value.",
+      icon: <BarChart3 size={28} />,
+      color: "bg-indigo-600"
+    },
+    {
+      title: "Email Marketing",
+      description: "Automated flows and targeted campaigns to nurture leads and increase customer lifetime value.",
+      icon: <Mail size={28} />,
+      color: "bg-purple-600"
+    },
+    {
+      title: "Dropshipping Store Setup",
+      description: "Specialized setups for dropshipping businesses, including supplier integration and automated fulfillment.",
+      icon: <Truck size={28} />,
       color: "bg-orange-600"
+    },
+    {
+      title: "Marketing Strategy",
+      description: "Comprehensive digital marketing roadmaps tailored to your brand's unique goals and market position.",
+      icon: <Target size={28} />,
+      color: "bg-red-600"
+    },
+    {
+      title: "360° Consultation & Ongoing Support",
+      description: "Expert guidance and technical support to ensure your store remains competitive and technically sound.",
+      icon: <Headphones size={28} />,
+      color: "bg-cyan-600"
     }
   ];
 
   return (
-    <section id="services" className="py-24 relative">
+    <section id="services" className="py-24 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Strategic <span className="text-blue-500">Services.</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">Scalable solutions designed to handle the complexities of modern e-commerce.</p>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">Expert <span className="text-blue-500">Solutions.</span></h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Comprehensive e-commerce services to build, grow, and scale your digital brand.</p>
         </div>
 
-        <div className="relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="sticky top-24 mb-12"
+              transition={{ delay: index * 0.05 }}
+              whileHover={{ y: -12 }}
+              className="group relative bg-[#1a1a1a] p-8 rounded-[32px] border border-white/5 hover:border-blue-500/30 transition-all duration-500 flex flex-col h-full overflow-hidden"
             >
-              <div className={`group relative bg-[#1a1a1a] p-8 md:p-12 rounded-[40px] border border-white/10 shadow-2xl flex flex-col md:flex-row gap-8 items-center transition-all duration-500 hover:border-blue-500/30`}>
-                <div className={`w-20 h-20 md:w-24 md:h-24 ${service.color} rounded-3xl flex items-center justify-center text-white shrink-0 shadow-lg`}>
-                  {service.icon}
-                </div>
-                <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4">{service.title}</h3>
-                  <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                    {service.description}
-                  </p>
-                </div>
-                <div className="hidden md:block">
-                  <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-600 transition-all">
-                    <ArrowRight size={20} />
-                  </div>
-                </div>
+              {/* Background Glow */}
+              <div className="absolute inset-0 bg-linear-to-br from-blue-600/0 via-transparent to-blue-600/0 group-hover:from-blue-600/10 group-hover:to-blue-600/5 transition-all duration-700 pointer-events-none" />
+              <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-600/0 group-hover:bg-blue-600/10 rounded-full blur-3xl transition-all duration-700 pointer-events-none" />
+
+              <div className={`relative z-10 w-14 h-14 ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-115 group-hover:-translate-y-1 transition-all duration-500`}>
+                {service.icon}
+              </div>
+              <h3 className="relative z-10 text-xl font-bold mb-4 leading-tight group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-500 origin-left">
+                {service.title}
+              </h3>
+              <p className="relative z-10 text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                {service.description}
+              </p>
+              <div className="relative z-10 flex items-center gap-2 text-blue-500 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                Learn More <ArrowRight size={16} />
               </div>
             </motion.div>
           ))}
@@ -1065,6 +1189,7 @@ export default function Portfolio() {
       <Hero />
       <TrustBadges />
       <BrandSection />
+      <SocialProofStrip />
       <About />
       <Services />
       <Projects />
