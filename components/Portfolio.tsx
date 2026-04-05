@@ -675,7 +675,7 @@ const About = () => {
               <div className="flex gap-4">
                 <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-blue-600 transition-colors"><Linkedin size={18} /></a>
                 <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-blue-600 transition-colors"><Github size={18} /></a>
-                <a href="mailto:ezemdukas1@gmail.com" className="p-2 bg-white/5 rounded-full hover:bg-blue-600 transition-colors"><Mail size={18} /></a>
+                <a href="mailto:ezendukas1@gmail.com" className="p-2 bg-white/5 rounded-full hover:bg-blue-600 transition-colors"><Mail size={18} /></a>
               </div>
             </div>
           </motion.div>
@@ -783,32 +783,52 @@ const Services = () => {
 const Projects = () => {
   const projects = [
     {
-      title: "Skin Care E-commerce",
-      category: "Shopify Custom Development",
-      image: "https://picsum.photos/seed/skincare/800/600",
+      title: "Sopotex",
+      url: "https://sopotex.eu/",
+      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      image: "https://picsum.photos/seed/sopotex/800/600",
       views: "12.4k",
       appreciations: "842"
     },
     {
-      title: "Crypto Wallet App",
-      category: "UI/UX Design & Integration",
-      image: "https://picsum.photos/seed/crypto/800/600",
+      title: "Wilkinson & Rivera",
+      url: "https://www.wilkinson-rivera.com/",
+      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      image: "https://picsum.photos/seed/wilkinson/800/600",
       views: "8.9k",
       appreciations: "560"
     },
     {
-      title: "Food Delivery UI",
-      category: "Mobile-First Storefront",
-      image: "https://picsum.photos/seed/foodapp/800/600",
+      title: "Rokia Jewelries",
+      url: "https://rokiajewelries.com/",
+      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      image: "https://picsum.photos/seed/rokia/800/600",
       views: "15.2k",
       appreciations: "1.2k"
     },
     {
-      title: "Tech Gadgets Hub",
-      category: "Performance Optimization",
-      image: "https://picsum.photos/seed/gadgets/800/600",
+      title: "Hey Pretty Beauty",
+      url: "https://www.heyprettybeauty.com/",
+      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      image: "https://picsum.photos/seed/heypretty/800/600",
+      views: "18.1k",
+      appreciations: "1.5k"
+    },
+    {
+      title: "Cognvita",
+      url: "https://cognvita.com",
+      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      image: "https://picsum.photos/seed/cognvita/800/600",
       views: "6.7k",
       appreciations: "420"
+    },
+    {
+      title: "Rays Online Store",
+      url: "https://raysonlinestore.com/",
+      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      image: "https://picsum.photos/seed/rays/800/600",
+      views: "9.3k",
+      appreciations: "610"
     }
   ];
 
@@ -875,16 +895,29 @@ const Projects = () => {
                     whileHover={{ opacity: 1, y: 0 }}
                     className="absolute bottom-8"
                   >
-                    <span className="px-6 py-2 bg-white text-black rounded-full text-sm font-bold flex items-center gap-2">
+                    <a 
+                      href={project.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-6 py-2 bg-white text-black rounded-full text-sm font-bold flex items-center gap-2"
+                    >
                       View Project <ExternalLink size={14} />
-                    </span>
+                    </a>
                   </motion.div>
                 </div>
               </div>
               <div className="flex justify-between items-start px-2">
                 <div>
-                  <h3 className="text-2xl font-display font-bold mb-1 group-hover:text-blue-500 transition-colors">{project.title}</h3>
-                  <p className="text-gray-500 font-medium text-sm uppercase tracking-wider">{project.category}</p>
+                  <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-blue-500 transition-colors">{project.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-4">{project.description}</p>
+                  <a 
+                    href={project.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-full text-sm font-bold hover:bg-blue-700 transition-all"
+                  >
+                    View Project <ExternalLink size={14} />
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -1011,7 +1044,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-blue-200 uppercase font-bold tracking-wider">Email Me</div>
-                    <div className="text-lg font-bold">ezemdukas1@gmail.com</div>
+                    <div className="text-lg font-bold">ezendukas1@gmail.com</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 text-white">
