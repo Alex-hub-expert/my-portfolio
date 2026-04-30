@@ -303,8 +303,8 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="/regenerated_image_1777567232395.png" 
-              alt="Shopify Tech Store" 
+              src="/regenerated_image_1777567294682.png" 
+              alt="Sopotex.eu - Auto Stoff Garage" 
               fill
               className="object-cover"
               referrerPolicy="no-referrer"
@@ -419,7 +419,7 @@ const TrustBadges = () => {
 
 const BrandSection = () => {
   const brands = [
-    "COSORI", "pawsync", "REUZEL", "KNOSS", "mosqitter", "nani", "FASCO", "LOST COAST", "PAINTLIFE", "SPEEDGEAR", "BLUEBIRD", "NANI", "KNOSS", "COSORI", "pawsync"
+    "SOPOTEX", "COSORI", "pawsync", "REUZEL", "KNOSS", "mosqitter", "nani", "FASCO", "LOST COAST", "PAINTLIFE", "SPEEDGEAR", "BLUEBIRD", "NANI", "KNOSS", "COSORI", "pawsync"
   ];
 
   // Duplicate brands for seamless loop
@@ -783,12 +783,12 @@ const Services = () => {
 const Projects = () => {
   const projects = [
     {
-      title: "Sopotex",
+      title: "Sopotex.eu",
       url: "https://sopotex.eu/",
-      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      description: "Custom Shopify experience for Europe's leading classic car upholstery and automotive fabric specialist.",
       image: "/regenerated_image_1777567294682.png",
-      views: "12.4k",
-      appreciations: "842"
+      views: "14.8k",
+      appreciations: "1.1k"
     },
     {
       title: "Wilkinson & Rivera",
