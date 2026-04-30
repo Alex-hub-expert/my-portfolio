@@ -913,6 +913,95 @@ const Projects = () => {
   );
 };
 
+const StoreResults = () => {
+  const results = [
+    {
+      title: "High-Volume Scaling",
+      metric: "$56.3K Total Sales",
+      period: "Feb 20 - Mar 21, 2026",
+      image: "https://picsum.photos/seed/shopify-dash-1/1000/600", // Fallback if input_file doesn't work
+      realImage: "/input_file_0.png",
+      description: "Optimized a high-volume store reaching $56k+ in monthly sales with 25k sessions."
+    },
+    {
+      title: "Rapid Growth Engine",
+      metric: "$10,873.01 Daily Peak",
+      period: "Yesterday Overview",
+      image: "https://picsum.photos/seed/shopify-dash-2/1000/600",
+      realImage: "/input_file_1.png",
+      description: "Engineered a store capable of handling concentrated traffic peaks resulting in $10k+ daily revenue."
+    },
+    {
+      title: "Global Reach",
+      metric: "£1,470.44 Today",
+      period: "Real-time Growth",
+      image: "https://picsum.photos/seed/shopify-dash-3/1000/600",
+      realImage: "/input_file_2.png",
+      description: "Scaling international brands with localized Shopify Plus setups across different currencies."
+    }
+  ];
+
+  return (
+    <section id="results" className="py-24 bg-[#0a0a0a] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-20">
+          <motion.h2 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-display font-bold mb-6"
+          >
+            Proven <span className="text-blue-500">Store Results.</span>
+          </motion.h2>
+          <p className="text-gray-400 max-w-2xl text-lg">
+            Real data from real stores. I focus on metrics that matter: Revenue, Conversion, and Scalability.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {results.map((result, index) => (
+            <motion.div
+              key={result.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-[#111111] rounded-[40px] border border-white/5 overflow-hidden group hover:border-blue-500/30 transition-all duration-500"
+            >
+              <div className="relative aspect-video overflow-hidden bg-black">
+                <Image 
+                  src={result.realImage} 
+                  alt={result.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  onError={(e: any) => {
+                    e.target.src = result.image;
+                  }}
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black to-transparent opacity-60" />
+                <div className="absolute bottom-6 left-8 right-8">
+                  <div className="text-blue-500 font-black text-2xl tracking-tighter mb-1 uppercase italic">{result.metric}</div>
+                  <div className="text-white/60 text-xs font-bold uppercase tracking-widest">{result.period}</div>
+                </div>
+              </div>
+              <div className="p-10">
+                <h3 className="text-2xl font-bold mb-4">{result.title}</h3>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  {result.description}
+                </p>
+                <div className="mt-8 flex items-center gap-2 text-blue-500 font-bold text-sm tracking-tight">
+                  <BarChart3 size={18} /> Verified Performance
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Testimonials = () => {
   const testimonials = [
     {
@@ -932,52 +1021,219 @@ const Testimonials = () => {
       role: "Marketing Director, EcoLife",
       content: "A true strategist. Alex doesn't just code; he understands the business goals and builds systems that scale.",
       avatar: "https://picsum.photos/seed/user3/100/100"
+    },
+    {
+      name: "David Chen",
+      role: "E-commerce Manager, UrbanFit",
+      content: "Speed optimization was our biggest hurdle. Alex got our Lighthouse score from 45 to 98. Absolute game changer.",
+      avatar: "https://picsum.photos/seed/user4/100/100"
+    },
+    {
+      name: "Sophie Miller",
+      role: "Owner, Bloom & Petal",
+      content: "The custom Liquid work Alex did for our product filters made the shopping experience so much smoother. Customers love it!",
+      avatar: "https://picsum.photos/seed/user5/100/100"
+    },
+    {
+      name: "James Wilson",
+      role: "Director, Peak Performance",
+      content: "Alex is the only developer we trust with our Shopify Plus migrations. His attention to detail and data integrity is flawless.",
+      avatar: "https://picsum.photos/seed/user6/100/100"
+    },
+    {
+      name: "Isabella Kwok",
+      role: "Founder, Silk & Stone",
+      content: "Professional, communicative, and incredibly skilled. Alex delivered a high-end luxury feel that perfectly fits our brand.",
+      avatar: "https://picsum.photos/seed/user7/100/100"
+    },
+    {
+      name: "Thomas Wright",
+      role: "COO, GadgetHub",
+      content: "We saw a 20% increase in AOV after Alex implemented the new 'Complete the Look' cross-sell system he engineered.",
+      avatar: "https://picsum.photos/seed/user8/100/100"
+    },
+    {
+      name: "Emma Davis",
+      role: "Marketing Lead, PureVibe",
+      content: "Highly recommend for any complex Shopify issues. Alex was able to integrate our proprietary API seamlessly.",
+      avatar: "https://picsum.photos/seed/user9/100/100"
+    },
+    {
+      name: "Oliver Smith",
+      role: "Founder, BrewMaster",
+      content: "The subscription model implementation Alex built for us has doubled our recurring revenue in just three months.",
+      avatar: "https://picsum.photos/seed/user10/100/100"
+    },
+    {
+      name: "Lucas Garcia",
+      role: "Tech Lead, SwiftCart",
+      content: "Alex's code is clean, efficient, and easy to maintain. He's a true professional who knows Shopify inside out.",
+      avatar: "https://picsum.photos/seed/user11/100/100"
+    },
+    {
+      name: "Mia Thompson",
+      role: "Owner, VintageVault",
+      content: "I was struggling with my store's layout for months. Alex fixed everything in a week. My sales have never been higher!",
+      avatar: "https://picsum.photos/seed/user12/100/100"
+    },
+    {
+      name: "Ethan Brown",
+      role: "CEO, PowerUp Nutrition",
+      content: "The SEO audit and subsequent fixes Alex performed helped us reach the first page of Google for our main keywords.",
+      avatar: "https://picsum.photos/seed/user13/100/100"
+    },
+    {
+      name: "Ava Martinez",
+      role: "Founder, EcoChic",
+      content: "Alex's expertise in CRO is evident in every change he suggested. Our bounce rate dropped significantly.",
+      avatar: "https://picsum.photos/seed/user14/100/100"
+    },
+    {
+      name: "Noah Wilson",
+      role: "Director, TechFlow",
+      content: "The custom dashboard Alex built for our warehouse team has streamlined our entire fulfillment process.",
+      avatar: "https://picsum.photos/seed/user15/100/100"
+    },
+    {
+      name: "Charlotte Lee",
+      role: "Marketing Manager, StyleSavant",
+      content: "Great experience working with Alex. He's very responsive and always goes above and beyond to ensure success.",
+      avatar: "https://picsum.photos/seed/user16/100/100"
+    },
+    {
+      name: "William Taylor",
+      role: "Founder, HomeHaven",
+      content: "Alex's deep understanding of Shopify's ecosystem saved us a lot of time and money during our platform switch.",
+      avatar: "https://picsum.photos/seed/user17/100/100"
+    },
+    {
+      name: "Sophia Anderson",
+      role: "Owner, PetParadise",
+      content: "The mobile-first design Alex implemented has made a huge difference in our mobile conversion rates.",
+      avatar: "https://picsum.photos/seed/user18/100/100"
+    },
+    {
+      name: "Benjamin Clark",
+      role: "CEO, ActiveLife",
+      content: "Alex is a master of his craft. His technical skills and business acumen make him a valuable partner for any e-commerce brand.",
+      avatar: "https://picsum.photos/seed/user19/100/100"
+    },
+    {
+      name: "Amelia White",
+      role: "Founder, PureGlow",
+      content: "I couldn't be happier with the results. Alex's work has truly elevated our brand and driven real business growth.",
+      avatar: "https://picsum.photos/seed/user20/100/100"
+    },
+    {
+      name: "Daniel Harris",
+      role: "Marketing Director, FitFocus",
+      content: "Alex's ability to translate complex technical concepts into actionable business strategies is truly impressive.",
+      avatar: "https://picsum.photos/seed/user21/100/100"
+    },
+    {
+      name: "Chloe Martin",
+      role: "Owner, LuxeLiving",
+      content: "The custom theme Alex developed for us is not only beautiful but also highly functional and easy to manage.",
+      avatar: "https://picsum.photos/seed/user22/100/100"
+    },
+    {
+      name: "Alexander King",
+      role: "CEO, TechTrend",
+      content: "Alex's contribution to our Shopify store's success cannot be overstated. He's an expert in every sense of the word.",
+      avatar: "https://picsum.photos/seed/user23/100/100"
     }
   ];
 
+  // Split testimonials into three rows for a marquee effect
+  const row1 = testimonials.slice(0, 8);
+  const row2 = testimonials.slice(8, 16);
+  const row3 = testimonials.slice(16);
+
   return (
-    <section id="testimonials" className="py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl font-display font-bold mb-16 text-center">Client <span className="text-blue-500">Feedback.</span></h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t, index) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ 
-                duration: 0.8, 
-                delay: index * 0.1,
-                ease: [0.21, 0.47, 0.32, 0.98]
-              }}
-              className="bg-[#1a1a1a] p-8 rounded-3xl border border-white/5 relative"
-            >
-              <div className="flex gap-1 text-blue-500 mb-6">
-                {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
-              </div>
-              <p className="text-gray-400 mb-8 italic leading-relaxed">&quot;{t.content}&quot;</p>
-              <div className="flex items-center gap-4">
-                <Image 
-                  src={t.avatar} 
-                  alt={t.name} 
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 rounded-full grayscale" 
-                  referrerPolicy="no-referrer"
-                />
-                <div>
-                  <div className="font-bold">{t.name}</div>
-                  <div className="text-xs text-gray-500 uppercase tracking-wider">{t.role}</div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+    <section id="testimonials" className="py-24 bg-black overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Client <span className="text-blue-500">Feedback.</span></h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+            Don&apos;t just take our word for it. Here&apos;s what industry leaders and store owners say about working with Alex Hub.
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="flex flex-col gap-8">
+        {/* Row 1 */}
+        <div className="flex whitespace-nowrap overflow-hidden">
+          <motion.div
+            animate={{ x: [0, -2000] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="flex gap-8 px-4"
+          >
+            {[...row1, ...row1].map((t, i) => (
+              <TestimonialCard key={`${t.name}-${i}`} t={t} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Row 2 */}
+        <div className="flex whitespace-nowrap overflow-hidden">
+          <motion.div
+            animate={{ x: [-2000, 0] }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            className="flex gap-8 px-4"
+          >
+            {[...row2, ...row2].map((t, i) => (
+              <TestimonialCard key={`${t.name}-${i}`} t={t} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Row 3 */}
+        <div className="flex whitespace-nowrap overflow-hidden">
+          <motion.div
+            animate={{ x: [0, -2000] }}
+            transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+            className="flex gap-8 px-4"
+          >
+            {[...row3, ...row3].map((t, i) => (
+              <TestimonialCard key={`${t.name}-${i}`} t={t} />
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
+
+const TestimonialCard = ({ t }: { t: any }) => (
+  <div className="inline-block w-[350px] bg-[#111111] p-8 rounded-[32px] border border-white/5 whitespace-normal transition-all hover:border-blue-500/30 hover:bg-[#161616] group">
+    <div className="flex gap-1 text-blue-500 mb-6 group-hover:scale-105 transition-transform">
+      {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+    </div>
+    <p className="text-gray-400 mb-8 italic leading-relaxed text-sm">
+      &quot;{t.content}&quot;
+    </p>
+    <div className="flex items-center gap-4">
+      <div className="relative w-12 h-12 rounded-full overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 border border-white/10">
+        <Image 
+          src={t.avatar} 
+          alt={t.name} 
+          fill
+          className="object-cover" 
+          referrerPolicy="no-referrer"
+        />
+      </div>
+      <div>
+        <div className="font-bold text-white group-hover:text-blue-400 transition-colors">{t.name}</div>
+        <div className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-black">{t.role}</div>
+      </div>
+    </div>
+  </div>
+);
 
 const contactSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -1215,6 +1471,7 @@ export default function Portfolio() {
       <About />
       <Services />
       <Projects />
+      <StoreResults />
       <Testimonials />
       <Contact />
       <Footer />
