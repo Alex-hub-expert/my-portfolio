@@ -263,7 +263,7 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="/regenerated_image_1777567248389.png" 
+              src="https://picsum.photos/seed/shopify-skincare/800/1600" 
               alt="Shopify Skincare Store" 
               fill
               className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -283,7 +283,7 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="/regenerated_image_1777567259857.png" 
+              src="https://picsum.photos/seed/shopify-fashion/800/1600" 
               alt="Shopify Fashion Store" 
               fill
               className="object-cover"
@@ -303,8 +303,8 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="/regenerated_image_1777567294682.png" 
-              alt="Sopotex.eu - Auto Stoff Garage" 
+              src="https://picsum.photos/seed/shopify-tech/800/1600" 
+              alt="Shopify Tech Store" 
               fill
               className="object-cover"
               referrerPolicy="no-referrer"
@@ -419,7 +419,7 @@ const TrustBadges = () => {
 
 const BrandSection = () => {
   const brands = [
-    "SOPOTEX", "COSORI", "pawsync", "REUZEL", "KNOSS", "mosqitter", "nani", "FASCO", "LOST COAST", "PAINTLIFE", "SPEEDGEAR", "BLUEBIRD", "NANI", "KNOSS", "COSORI", "pawsync"
+    "COSORI", "pawsync", "REUZEL", "KNOSS", "mosqitter", "nani", "FASCO", "LOST COAST", "PAINTLIFE", "SPEEDGEAR", "BLUEBIRD", "NANI", "KNOSS", "COSORI", "pawsync"
   ];
 
   // Duplicate brands for seamless loop
@@ -783,18 +783,18 @@ const Services = () => {
 const Projects = () => {
   const projects = [
     {
-      title: "Sopotex.eu",
+      title: "Sopotex",
       url: "https://sopotex.eu/",
-      description: "Custom Shopify experience for Europe's leading classic car upholstery and automotive fabric specialist.",
-      image: "/regenerated_image_1777567294682.png",
-      views: "14.8k",
-      appreciations: "1.1k"
+      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      image: "https://picsum.photos/seed/sopotex-mockup/800/600",
+      views: "12.4k",
+      appreciations: "842"
     },
     {
       title: "Wilkinson & Rivera",
       url: "https://www.wilkinson-rivera.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "/regenerated_image_1777567322663.png",
+      image: "https://picsum.photos/seed/wilkinson-rivera-mockup/800/600",
       views: "8.9k",
       appreciations: "560"
     },
@@ -802,7 +802,7 @@ const Projects = () => {
       title: "Rokia Jewelries",
       url: "https://rokiajewelries.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "/regenerated_image_1777567336963.png",
+      image: "https://picsum.photos/seed/rokia-jewelries-mockup/800/600",
       views: "15.2k",
       appreciations: "1.2k"
     },
@@ -810,7 +810,7 @@ const Projects = () => {
       title: "Hey Pretty Beauty",
       url: "https://www.heyprettybeauty.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "/regenerated_image_1777567234885.png",
+      image: "https://picsum.photos/seed/hey-pretty-beauty-mockup/800/600",
       views: "18.1k",
       appreciations: "1.5k"
     },
@@ -818,7 +818,7 @@ const Projects = () => {
       title: "Cognvita",
       url: "https://cognvita.com",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "/regenerated_image_1777567248073.png",
+      image: "https://picsum.photos/seed/cognvita-mockup/800/600",
       views: "6.7k",
       appreciations: "420"
     },
@@ -826,7 +826,7 @@ const Projects = () => {
       title: "Rays Online Store",
       url: "https://raysonlinestore.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "/regenerated_image_1777567258446.png",
+      image: "https://picsum.photos/seed/rays-online-store-mockup/800/600",
       views: "9.3k",
       appreciations: "610"
     }
@@ -866,24 +866,14 @@ const Projects = () => {
                 rel="noopener noreferrer"
                 className="block cursor-pointer"
               >
-                <div className="relative aspect-4/3 overflow-hidden rounded-3xl mb-6 bg-[#1a1a1a] border border-white/10 group-hover:border-blue-500/30 transition-colors">
-                  {/* Browser Top Bar Mockup */}
-                  <div className="absolute top-0 left-0 right-0 h-8 bg-[#2a2a2a] border-b border-white/5 z-20 flex items-center px-4 gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
-                    <div className="ml-4 h-4 w-32 bg-white/5 rounded-full" />
-                  </div>
-
-                  <div className="pt-8 w-full h-full">
-                    <Image 
-                      src={project.image} 
-                      alt={project.title} 
-                      fill
-                      className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
+                <div className="relative aspect-4/3 overflow-hidden rounded-3xl mb-6 bg-[#1a1a1a]">
+                  <Image 
+                    src={project.image} 
+                    alt={project.title} 
+                    fill
+                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                    referrerPolicy="no-referrer"
+                  />
                   
                   {/* Behance-style Overlay */}
                   <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px] flex flex-col items-center justify-center">
