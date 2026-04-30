@@ -263,7 +263,7 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/skincare-app/800/1600" 
+              src="/regenerated_image_1777567248389.png" 
               alt="Shopify Skincare Store" 
               fill
               className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -283,8 +283,8 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/food-app/800/1600" 
-              alt="Shopify Food Store" 
+              src="/regenerated_image_1777567259857.png" 
+              alt="Shopify Fashion Store" 
               fill
               className="object-cover"
               referrerPolicy="no-referrer"
@@ -303,8 +303,8 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/plant-app/800/1600" 
-              alt="Shopify Plant Store" 
+              src="/regenerated_image_1777567232395.png" 
+              alt="Shopify Tech Store" 
               fill
               className="object-cover"
               referrerPolicy="no-referrer"
@@ -786,7 +786,7 @@ const Projects = () => {
       title: "Sopotex",
       url: "https://sopotex.eu/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/sopotex/800/600",
+      image: "/regenerated_image_1777567294682.png",
       views: "12.4k",
       appreciations: "842"
     },
@@ -794,7 +794,7 @@ const Projects = () => {
       title: "Wilkinson & Rivera",
       url: "https://www.wilkinson-rivera.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/wilkinson/800/600",
+      image: "/regenerated_image_1777567322663.png",
       views: "8.9k",
       appreciations: "560"
     },
@@ -802,7 +802,7 @@ const Projects = () => {
       title: "Rokia Jewelries",
       url: "https://rokiajewelries.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/rokia/800/600",
+      image: "/regenerated_image_1777567336963.png",
       views: "15.2k",
       appreciations: "1.2k"
     },
@@ -810,7 +810,7 @@ const Projects = () => {
       title: "Hey Pretty Beauty",
       url: "https://www.heyprettybeauty.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/heypretty/800/600",
+      image: "/regenerated_image_1777567234885.png",
       views: "18.1k",
       appreciations: "1.5k"
     },
@@ -818,7 +818,7 @@ const Projects = () => {
       title: "Cognvita",
       url: "https://cognvita.com",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/cognvita/800/600",
+      image: "/regenerated_image_1777567248073.png",
       views: "6.7k",
       appreciations: "420"
     },
@@ -826,7 +826,7 @@ const Projects = () => {
       title: "Rays Online Store",
       url: "https://raysonlinestore.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/rays/800/600",
+      image: "/regenerated_image_1777567258446.png",
       views: "9.3k",
       appreciations: "610"
     }
@@ -858,68 +858,63 @@ const Projects = () => {
                 delay: index * 0.1,
                 ease: [0.21, 0.47, 0.32, 0.98]
               }}
-              className="group cursor-pointer"
+              className="group"
             >
-              <div className="relative aspect-4/3 overflow-hidden rounded-3xl mb-6 bg-[#1a1a1a]">
-                <Image 
-                  src={project.image} 
-                  alt={project.title} 
-                  fill
-                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
-                
-                {/* Behance-style Overlay */}
-                <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px] flex flex-col items-center justify-center">
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileHover={{ opacity: 1, scale: 1 }}
-                    className="flex gap-6"
-                  >
-                    <div className="flex flex-col items-center gap-2 text-white">
-                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                        <Eye size={20} />
-                      </div>
-                      <span className="text-xs font-bold uppercase tracking-widest">{project.views}</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2 text-white">
-                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                        <ThumbsUp size={20} />
-                      </div>
-                      <span className="text-xs font-bold uppercase tracking-widest">{project.appreciations}</span>
-                    </div>
-                  </motion.div>
+              <a 
+                href={project.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block cursor-pointer"
+              >
+                <div className="relative aspect-4/3 overflow-hidden rounded-3xl mb-6 bg-[#1a1a1a] border border-white/10 group-hover:border-blue-500/30 transition-colors">
+                  {/* Browser Top Bar Mockup */}
+                  <div className="absolute top-0 left-0 right-0 h-8 bg-[#2a2a2a] border-b border-white/5 z-20 flex items-center px-4 gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                    <div className="ml-4 h-4 w-32 bg-white/5 rounded-full" />
+                  </div>
+
+                  <div className="pt-8 w-full h-full">
+                    <Image 
+                      src={project.image} 
+                      alt={project.title} 
+                      fill
+                      className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
                   
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                    className="absolute bottom-8"
-                  >
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="px-6 py-2 bg-white text-black rounded-full text-sm font-bold flex items-center gap-2"
+                  {/* Behance-style Overlay */}
+                  <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px] flex flex-col items-center justify-center">
+                    <div className="flex gap-6">
+                      <div className="flex flex-col items-center gap-2 text-white">
+                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                          <Eye size={20} />
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-widest">{project.views}</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-2 text-white">
+                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                          <ThumbsUp size={20} />
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-widest">{project.appreciations}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-between items-start px-2">
+                  <div>
+                    <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-blue-500 transition-colors">{project.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-4">{project.description}</p>
+                    <div 
+                      className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-full text-sm font-bold hover:bg-blue-700 transition-all"
                     >
                       View Project <ExternalLink size={14} />
-                    </a>
-                  </motion.div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-between items-start px-2">
-                <div>
-                  <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-blue-500 transition-colors">{project.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-4">{project.description}</p>
-                  <a 
-                    href={project.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-full text-sm font-bold hover:bg-blue-700 transition-all"
-                  >
-                    View Project <ExternalLink size={14} />
-                  </a>
-                </div>
-              </div>
+              </a>
             </motion.div>
           ))}
         </div>
@@ -958,10 +953,14 @@ const Testimonials = () => {
           {testimonials.map((t, index) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.1,
+                ease: [0.21, 0.47, 0.32, 0.98]
+              }}
               className="bg-[#1a1a1a] p-8 rounded-3xl border border-white/5 relative"
             >
               <div className="flex gap-1 text-blue-500 mb-6">
