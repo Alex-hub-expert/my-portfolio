@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import { Inter, Lexend } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const inter = Inter({
@@ -22,6 +23,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" className={`${inter.variable} ${lexend.variable} dark`}>
       <body className="bg-[#121212] text-gray-100 antialiased selection:bg-blue-500/30" suppressHydrationWarning>
         {children}
+        <Analytics />
       </body>
     </html>
   );
