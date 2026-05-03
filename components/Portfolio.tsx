@@ -143,11 +143,17 @@ const Navbar = () => {
 
 const Hero = () => {
   const constraintsRef = useRef(null);
+  const { scrollY } = useScroll();
+  const yBg = useTransform(scrollY, [0, 1000], [0, 200]);
+  const yGlow = useTransform(scrollY, [0, 1000], [0, -150]);
+  const yPhone1 = useTransform(scrollY, [0, 1000], [0, -100]);
+  const yPhone2 = useTransform(scrollY, [0, 1000], [0, -50]);
+  const yPhone3 = useTransform(scrollY, [0, 1000], [0, -150]);
 
   return (
     <section ref={constraintsRef} className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-black">
       {/* Abstract Background Waves */}
-      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+      <motion.div style={{ y: yBg }} className="absolute inset-0 z-0 opacity-40 pointer-events-none">
         <svg className="w-full h-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M-100 600C200 400 600 800 1000 400C1400 0 1600 200 1800 100" stroke="url(#paint0_linear)" strokeWidth="80" strokeLinecap="round" />
           <path d="M-200 500C100 300 500 700 900 300C1300 -100 1500 100 1700 0" stroke="url(#paint1_linear)" strokeWidth="60" strokeLinecap="round" />
@@ -162,10 +168,10 @@ const Hero = () => {
             </linearGradient>
           </defs>
         </svg>
-      </div>
+      </motion.div>
 
       {/* Background Glows */}
-      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
+      <motion.div style={{ y: yGlow }} className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
       
       {/* Draggable Floating Marquee */}
       <motion.div
@@ -252,6 +258,7 @@ const Hero = () => {
         <div className="relative hidden lg:block h-[600px]">
           {/* Staggered Image Stack - Shopify Store Layouts */}
           <motion.div
+            style={{ y: yPhone1 }}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
@@ -272,6 +279,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
+            style={{ y: yPhone2 }}
             initial={{ opacity: 0, x: 50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -292,6 +300,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
+            style={{ y: yPhone3 }}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7 }}
@@ -303,7 +312,7 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/shopify-tech/800/1600" 
+              src="/regenerated_image_1777573182730.png" 
               alt="Shopify Tech Store" 
               fill
               className="object-cover"
@@ -422,13 +431,23 @@ const BrandSection = () => {
     "COSORI", "pawsync", "REUZEL", "KNOSS", "mosqitter", "nani", "FASCO", "LOST COAST", "PAINTLIFE", "SPEEDGEAR", "BLUEBIRD", "NANI", "KNOSS", "COSORI", "pawsync"
   ];
 
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
   // Duplicate brands for seamless loop
   const duplicatedBrands = [...brands, ...brands, ...brands];
 
   return (
-    <section className="py-32 bg-white overflow-hidden relative">
+    <section ref={sectionRef} className="py-32 bg-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
+          style={{ y: y1 }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -464,7 +483,7 @@ const BrandSection = () => {
       </div>
 
       {/* Isometric Marquee Container */}
-      <div className="relative h-[500px] md:h-[600px] -mt-20 md:-mt-40 pointer-events-none">
+      <motion.div style={{ y: y2 }} className="relative h-[500px] md:h-[600px] -mt-20 md:-mt-40 pointer-events-none">
         <div 
           className="absolute top-0 left-0 w-[200%] h-full flex flex-col gap-6"
           style={{
@@ -526,7 +545,7 @@ const BrandSection = () => {
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Bottom Gradient Overlay for transition back to dark */}
       <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-black to-transparent z-20" />
@@ -786,7 +805,7 @@ const Projects = () => {
       title: "Sopotex",
       url: "https://sopotex.eu/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/sopotex-mockup/800/600",
+      image: "/regenerated_image_1777556708521.png",
       views: "12.4k",
       appreciations: "842"
     },
@@ -794,7 +813,7 @@ const Projects = () => {
       title: "Wilkinson & Rivera",
       url: "https://www.wilkinson-rivera.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/wilkinson-rivera-mockup/800/600",
+      image: "/regenerated_image_1777557398984.png",
       views: "8.9k",
       appreciations: "560"
     },
@@ -802,7 +821,7 @@ const Projects = () => {
       title: "Rokia Jewelries",
       url: "https://rokiajewelries.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/rokia-jewelries-mockup/800/600",
+      image: "/regenerated_image_1777557402334.png",
       views: "15.2k",
       appreciations: "1.2k"
     },
@@ -913,6 +932,104 @@ const Projects = () => {
   );
 };
 
+const StoreDesignExpertise = () => {
+  const features = [
+    {
+      title: "Conversion-Led UX",
+      description: "Every pixel is placed with intent—to guide your customers from discovery to checkout with zero friction.",
+      icon: <Zap size={24} className="text-yellow-500" />
+    },
+    {
+      title: "Mobile-First DNA",
+      description: "80%+ of Shopify traffic is mobile. We design for the thumb first, ensuring a seamless experience on any device.",
+      icon: <RefreshCw size={24} className="text-blue-500" />
+    },
+    {
+      title: "Brand Storytelling",
+      description: "We don't just build shops; we build brands. High-end visual identity that resonates with your target audience.",
+      icon: <ShieldCheck size={24} className="text-emerald-500" />
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-white overflow-hidden relative">
+      <div className="absolute inset-0 bg-linear-to-b from-black/5 to-transparent pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-6xl font-display font-bold text-black mb-8 leading-tight tracking-tight">
+              Design That <br />
+              <span className="text-blue-600">Converts.</span>
+            </h2>
+            <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-lg">
+              We specialize in creating high-end, high-converting Shopify store designs that don&apos;t just look beautiful but drive real business results.
+            </p>
+            
+            <div className="space-y-8">
+              {features.map((feature, i) => (
+                <motion.div 
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex gap-6 items-start"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center shrink-0 shadow-sm">
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-black mb-2">{feature.title}</h3>
+                    <p className="text-gray-500 leading-relaxed text-sm">{feature.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          <div className="relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative aspect-square rounded-[60px] overflow-hidden shadow-2xl"
+            >
+              <Image 
+                src="https://picsum.photos/seed/shopify-design-hero/1200/1200"
+                alt="Store Design"
+                fill
+                className="object-cover"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-linear-to-tr from-blue-600/20 to-transparent" />
+              
+              {/* Floating Element - Design Stats */}
+              <motion.div
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-12 right-12 bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-black/5"
+              >
+                <div className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Success Rate</div>
+                <div className="text-4xl font-black text-blue-600 tracking-tighter">98%</div>
+                <div className="text-[10px] font-bold text-gray-500 mt-2 flex items-center gap-1">
+                  <CheckCircle2 size={12} className="text-emerald-500" /> Across 150+ Projects
+                </div>
+              </motion.div>
+            </motion.div>
+            
+            {/* Background Accent */}
+            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-100 rounded-full blur-3xl -z-10" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const StoreResults = () => {
   const results = [
     {
@@ -938,6 +1055,14 @@ const StoreResults = () => {
       image: "https://picsum.photos/seed/shopify-dash-3/1000/600",
       realImage: "/input_file_2.png",
       description: "Scaling international brands with localized Shopify Plus setups across different currencies."
+    },
+    {
+      title: "Conversion Specialist",
+      metric: "2.78% Conv. Rate",
+      period: "Optimization Phase",
+      image: "https://picsum.photos/seed/shopify-dash-4/1000/600",
+      realImage: "/input_file_3.png",
+      description: "Implemented high-converting checkout flows and product page hooks to stabilize conversion over 2.5%."
     }
   ];
 
@@ -958,7 +1083,7 @@ const StoreResults = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {results.map((result, index) => (
             <motion.div
               key={result.title}
@@ -1169,8 +1294,8 @@ const Testimonials = () => {
         {/* Row 1 */}
         <div className="flex whitespace-nowrap overflow-hidden">
           <motion.div
-            animate={{ x: [0, -2000] }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
             className="flex gap-8 px-4"
           >
             {[...row1, ...row1].map((t, i) => (
@@ -1182,8 +1307,8 @@ const Testimonials = () => {
         {/* Row 2 */}
         <div className="flex whitespace-nowrap overflow-hidden">
           <motion.div
-            animate={{ x: [-2000, 0] }}
-            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            animate={{ x: ["-50%", "0%"] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             className="flex gap-8 px-4"
           >
             {[...row2, ...row2].map((t, i) => (
@@ -1195,8 +1320,8 @@ const Testimonials = () => {
         {/* Row 3 */}
         <div className="flex whitespace-nowrap overflow-hidden">
           <motion.div
-            animate={{ x: [0, -2000] }}
-            transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
             className="flex gap-8 px-4"
           >
             {[...row3, ...row3].map((t, i) => (
@@ -1471,6 +1596,7 @@ export default function Portfolio() {
       <About />
       <Services />
       <Projects />
+      <StoreDesignExpertise />
       <StoreResults />
       <Testimonials />
       <Contact />
