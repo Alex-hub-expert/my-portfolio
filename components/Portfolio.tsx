@@ -971,10 +971,10 @@ const Projects = () => {
       category: "Shopify Development",
       longDescription: "A comprehensive Shopify overhaul for a premium lifestyle brand focused on ice-related products. The project involved a complete Liquid architecture redesign to support complex product variations and international scaling.",
       features: [
-        "Advanced Liquid Multi-Currency Setup",
-        "PageSpeed Optimization (90+ Mobile)",
-        "Custom Product Bundling Logic",
-        "Klaviyo Advanced Flow Integration"
+        "Custom Shopify Liquid Architecture",
+        "High-Speed Performance Engineering",
+        "Advanced Product Bundling Logic",
+        "SEO Performance Layer Optimization"
       ]
     },
     {
@@ -987,10 +987,10 @@ const Projects = () => {
       category: "CRO",
       longDescription: "Building a health-conscious brand from the ground up. Dogliness required a design system that projected scientific authority and modern pet wellness. We delivered a custom Shopify theme that scales globally.",
       features: [
-        "Custom Subscription Box Engine",
-        "Scientific Authority UI/UX",
-        "Global Inventory Management",
-        "Advanced Retention Analytics"
+        "Advanced Conversion Hooks",
+        "A/B Testing Implementation",
+        "Checkout Friction Elimination",
+        "Retention Flow Automation"
       ]
     },
     {
@@ -1003,10 +1003,10 @@ const Projects = () => {
       category: "UI/UX Design",
       longDescription: "A high-fidelity editorial destination for a luxury jewelry brand. We focused on massive product imagery and a micro-interaction-heavy checkout process to reduce cart abandonment by 40%.",
       features: [
-        "Interactive Jewelry Customizer",
-        "High-Speed Product Filters",
-        "Exclusive Membership Gating",
-        "Bespoke Lifestyle Video Integration"
+        "High-Fidelity Interaction Design",
+        "Visual Identity Systems",
+        "Premium Editorial Layouts",
+        "Micro-interaction Engineering"
       ]
     },
     {
@@ -1019,10 +1019,10 @@ const Projects = () => {
       category: "UI/UX Design",
       longDescription: "Engineered a high-end fashion destination that combines editorial aesthetics with aggressive conversion optimization. Custom collection filters and a bespoke mobile navigation system were key highlights.",
       features: [
-        "Interactive Size & Fit Guide",
-        "Besopke Cart Drawer with Cross-sells",
-        "Infinite Scroll & Dynamic Filtering",
-        "High-Fidelity UI Micro-animations"
+        "Mobile-First UX Strategy",
+        "Bespoke Branding Implementation",
+        "Visual Storytelling Grids",
+        "Accessibility Focused UI"
       ]
     },
     {
@@ -1032,29 +1032,29 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800&h=800",
       views: "24.2k",
       appreciations: "2.1k",
-      category: "Shopify Development",
+      category: "API Integration",
       longDescription: "Worked on technical scaling for Atoms, a major footwear retailer. Focused on headless integrations and custom API developments to streamline their complex logistical backend with Shopify Plus.",
       features: [
-        "Shopify Plus Scripts Optimization",
-        "Headless Commerce Transitioning",
-        "Custom Warehouse API Hook",
-        "Subscription Model Engineering"
+        "Third-Party API Integration",
+        "Headless Shopify Plus Architecture",
+        "Custom ERP Synchronization",
+        "Logistics Automation Layer"
       ]
     },
     {
-      title: "Spanx",
-      url: "https://spanx.com/",
-      description: "Enterprise Shopify Plus migration and complex multi-store global architecture.",
-      image: "https://images.unsplash.com/photo-1541099649105-f69ad23f324b?auto=format&fit=crop&q=80&w=800&h=800",
+      title: "K Emmanuel Stores",
+      url: "https://kemmanuelstores.myshopify.com/",
+      description: "Elegant Shopify solution for premium home and lifestyle essentials.",
+      image: "https://uploads.onecompiler.io/444u7b3dy/44nsaqzcc/Beth%20Bartholomew%20on%20Instagram_%20_Yesterday%20I%E2%80%A6.jfif",
       views: "32.5k",
       appreciations: "2.8k",
       category: "Shopify Development",
-      longDescription: "Migration of the global shapewear giant to a robust Shopify Plus multi-store environment. We focused on seamless data migration and a headless front-end for peak performance across 10+ international regions.",
+      longDescription: "A sophisticated e-commerce platform tailored for a global audience seeking premium home goods. We focused on a clean, editorial layout that highlights craftsmanship and quality, utilizing custom Shopify features for a high-end shopping experience.",
       features: [
-        "Headless Shopify Plus Development",
-        "Global Multi-Store Synchronization",
-        "Legacy Data Migration (Orders/Customers)",
-        "Custom ERP/NetSuite Integration"
+        "Shopify Liquid Optimization",
+        "Custom App Development",
+        "Advanced Theme Architecture",
+        "Multi-Pass Authentication"
       ]
     }
   ];
@@ -1853,11 +1853,11 @@ export default function Portfolio() {
       <TrustBadges />
       <BrandSection />
       <SocialProofStrip />
-      <About />
       <Services />
       <StoreDesignExpertise />
       <StoreResults />
       <Projects />
+      <About />
       <Testimonials />
       <Contact />
       <Footer />
