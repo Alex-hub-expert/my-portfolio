@@ -632,41 +632,8 @@ const SocialProofStrip = () => {
   );
 };
 
-const SkillBar = ({ skill, percentage }: { skill: string; percentage: number }) => {
-  return (
-    <div className="mb-6">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-[13px] font-black uppercase tracking-widest text-white/80">{skill}</span>
-        <span className="text-[12px] font-black text-blue-400">{percentage}%</span>
-      </div>
-      <div className="h-2.5 w-full bg-[#1a1a1a] rounded-full overflow-hidden relative">
-        <motion.div 
-          initial={{ width: 0 }}
-          whileInView={{ width: `${percentage}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-          className="h-full bg-blue-500 rounded-full relative"
-        >
-          {/* Electric Glow */}
-          <div className="absolute top-0 right-0 bottom-0 w-8 bg-linear-to-r from-transparent to-blue-300/30 blur-sm" />
-          <div className="absolute inset-0 bg-linear-to-r from-blue-600 to-blue-400" />
-        </motion.div>
-      </div>
-    </div>
-  );
-};
 
 const About = () => {
-  const skills = [
-    { name: 'Liquid', level: 98 },
-    { name: 'JavaScript', level: 95 },
-    { name: 'HTML5', level: 99 },
-    { name: 'CSS3', level: 97 },
-    { name: 'Technical SEO', level: 92 },
-    { name: 'CRO', level: 94 },
-    { name: 'API Integration', level: 90 }
-  ];
-
   return (
     <section id="about" className="py-24 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
@@ -699,32 +666,38 @@ const About = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-[#111111] p-10 md:p-16 rounded-[48px] border border-white/5 relative overflow-hidden"
+            className="relative aspect-[4/5] rounded-[48px] overflow-hidden shadow-2xl group"
           >
-            {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-[100px] pointer-events-none" />
+            <Image 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800&h=1000"
+              alt="Alex Smart Hub - Senior Shopify Solutions Architect"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40" />
             
-            <h3 className="text-2xl font-bold mb-10 flex items-center gap-3">
-              <Zap className="text-blue-500" />
-              Technical Prowess
-            </h3>
-            
-            <div className="space-y-2">
-              {skills.map((skill) => (
-                <SkillBar key={skill.name} skill={skill.name} percentage={skill.level} />
-              ))}
-            </div>
-
-            <div className="mt-12 pt-10 border-t border-white/5 flex items-center gap-5">
-              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-xl font-black shadow-xl shadow-blue-500/20">AS</div>
-              <div>
-                <div className="text-lg font-bold text-white">Alex Smart Hub</div>
-                <div className="text-[11px] text-gray-500 uppercase font-bold tracking-widest">Senior Shopify Solutions Architect</div>
+            <div className="absolute bottom-10 left-10 right-10">
+              <div className="flex items-center gap-5 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-xl font-black shadow-xl shadow-blue-500/40">AS</div>
+                <div>
+                  <div className="text-xl font-black text-white tracking-tight">Alex Smart Hub</div>
+                  <div className="text-[10px] text-blue-400 uppercase font-black tracking-widest">Senior Shopify Architect</div>
+                </div>
               </div>
             </div>
+
+            {/* Floating Trust Badge */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-8 right-8 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 text-white font-bold text-xs flex items-center gap-2"
+            >
+              <ShieldCheck size={14} className="text-blue-500" /> Authorized Shopify Partner
+            </motion.div>
           </motion.div>
         </div>
       </div>
