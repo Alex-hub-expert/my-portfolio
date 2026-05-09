@@ -20,6 +20,27 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${lexend.variable} dark`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const descriptor = Object.getOwnPropertyDescriptor(window, 'fetch');
+                  if (descriptor && !descriptor.writable && descriptor.configurable) {
+                    const originalFetch = window.fetch;
+                    Object.defineProperty(window, 'fetch', {
+                      writable: true,
+                      configurable: true,
+                      value: originalFetch
+                    });
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="bg-[#121212] text-gray-100 antialiased selection:bg-blue-500/30" suppressHydrationWarning>
         {children}
       </body>

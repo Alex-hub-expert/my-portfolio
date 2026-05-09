@@ -291,7 +291,7 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800&h=1600" 
+              src="https://uploads.onecompiler.io/444u7b3dy/44ns33b38/hero-product-showcase-Kajcg9hQauiiJu6AhhdhJ8.webp" 
               alt="Shopify Fashion Store" 
               fill
               className="object-cover"
@@ -965,7 +965,7 @@ const Projects = () => {
       title: "Ice Wood",
       url: "https://ice-wood.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "/regenerated_image_1777556708521.png",
+      image: "https://uploads.onecompiler.io/444u7b3dy/44ns33b38/hero-product-showcase-Kajcg9hQauiiJu6AhhdhJ8.webp",
       views: "12.4k",
       appreciations: "842",
       category: "Shopify Development",
@@ -978,10 +978,42 @@ const Projects = () => {
       ]
     },
     {
+      title: "Dogliness UK",
+      url: "https://dogliness.co.uk/",
+      description: "Premium natural grooming products for dogs, optimized for international growth.",
+      image: "https://uploads.onecompiler.io/444u7b3dy/44ns4y5dn/dogliness-mockup-VJu7ymKe6knuCSbjMzdAQu.webp",
+      views: "14.2k",
+      appreciations: "956",
+      category: "CRO",
+      longDescription: "Building a health-conscious brand from the ground up. Dogliness required a design system that projected scientific authority and modern pet wellness. We delivered a custom Shopify theme that scales globally.",
+      features: [
+        "Custom Subscription Box Engine",
+        "Scientific Authority UI/UX",
+        "Global Inventory Management",
+        "Advanced Retention Analytics"
+      ]
+    },
+    {
+      title: "Rokia Jewelleries",
+      url: "https://rokiajewelleries.com/",
+      description: "Luxury custom jewelry platform with a high-end aesthetic and seamless mobile experience.",
+      image: "https://uploads.onecompiler.io/444u7b3dy/44ns4y5dn/rokia-mockup-fYUupMoxu4Zh69SHFguzp2.webp",
+      views: "11.7k",
+      appreciations: "1.2k",
+      category: "UI/UX Design",
+      longDescription: "A high-fidelity editorial destination for a luxury jewelry brand. We focused on massive product imagery and a micro-interaction-heavy checkout process to reduce cart abandonment by 40%.",
+      features: [
+        "Interactive Jewelry Customizer",
+        "High-Speed Product Filters",
+        "Exclusive Membership Gating",
+        "Bespoke Lifestyle Video Integration"
+      ]
+    },
+    {
       title: "Pretty Girl Collection",
-      url: "https://prettygirlcollection.com/",
-      description: "Custom Shopify theme development for a high-end fashion brand with advanced filtering.",
-      image: "/regenerated_image_1777557398984.png",
+      url: "https://prettygirllcollectionn.com/",
+      description: "Custom Shopify theme development for an emerging high-end luxury fashion brand.",
+      image: "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&q=80&w=800&h=800",
       views: "18.1k",
       appreciations: "1.5k",
       category: "UI/UX Design",
@@ -997,7 +1029,7 @@ const Projects = () => {
       title: "Atoms",
       url: "https://atoms.com/",
       description: "Complex Shopify Plus optimization and technical performance engineering for scale.",
-      image: "/regenerated_image_1777557402334.png",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800&h=800",
       views: "24.2k",
       appreciations: "2.1k",
       category: "Shopify Development",
@@ -1010,67 +1042,19 @@ const Projects = () => {
       ]
     },
     {
-      title: "Sleek Fits",
-      url: "https://sleekfits.com/",
-      description: "Product page optimization and conversion-focused design for activewear brand.",
-      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac00bd?auto=format&fit=crop&q=80&w=800&h=800",
-      views: "15.7k",
-      appreciations: "1.2k",
-      category: "CRO",
-      longDescription: "Dedicated CRO sprint for an activewear giant. We analyzed over 100k user sessions to identify friction points and implemented a science-backed UI redesign of the product single pages.",
-      features: [
-        "Social Proof Overlay System",
-        "One-Page Checkout Optimization",
-        "Trust Badge Dynamic Generation",
-        "Hotjar Session-based UI Tweaks"
-      ]
-    },
-    {
-      title: "Cognivita",
-      url: "https://cognivita.com",
-      description: "Brand identity and custom Shopify setup for a innovative wellness brand.",
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800&h=800",
-      views: "9.3k",
-      appreciations: "610",
+      title: "Spanx",
+      url: "https://spanx.com/",
+      description: "Enterprise Shopify Plus migration and complex multi-store global architecture.",
+      image: "https://images.unsplash.com/photo-1541099649105-f69ad23f324b?auto=format&fit=crop&q=80&w=800&h=800",
+      views: "32.5k",
+      appreciations: "2.8k",
       category: "Shopify Development",
-      longDescription: "Building a brand from 0 to 1. Cognivita required a design system that projected scientific authority and modern wellness. We delivered a custom Shopify theme that serves both purposes perfectly.",
+      longDescription: "Migration of the global shapewear giant to a robust Shopify Plus multi-store environment. We focused on seamless data migration and a headless front-end for peak performance across 10+ international regions.",
       features: [
-        "Custom Graphic Design System",
-        "Health-Claims Compliant UI",
-        "Subscription Management Suite",
-        "Affiliate Dashboard Integration"
-      ]
-    },
-    {
-      title: "HC More",
-      url: "https://hcmore.nl/",
-      description: "Technical SEO and speed optimization for a leading Dutch beauty retailer.",
-      image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800&h=800",
-      views: "8.9k",
-      appreciations: "560",
-      category: "CRO",
-      longDescription: "European beauty retail optimization. HC More required a localized Shopify setup for the Dutch market with a heavy focus on technical SEO to displace established competitors.",
-      features: [
-        "Localized Shopify Plus Multilingual",
-        "Schema.org Semantic Markup",
-        "iDEAL Payment Gateway Fine-tuning",
-        "EU Cookie & GDPR Compliance Suite"
-      ]
-    },
-    {
-      title: "Watch Sights",
-      url: "https://watchsights.com/",
-      description: "Custom watch configuration tool and landing page development on Shopify.",
-      image: "/regenerated_image_1777573182730.png",
-      views: "11.2k",
-      appreciations: "940",
-      category: "API Integration",
-      longDescription: "The crown jewel of technical execution. We built a real-time reactive watch customizer using React and Liquid, allowing users to build their own watches and purchase them as a single Shopify SKU.",
-      features: [
-        "Real-time SVG Composition Engine",
-        "Dynamic SKU Pricing Logic",
-        "3D Product Render Integration",
-        "Client-Side Performance Tuning"
+        "Headless Shopify Plus Development",
+        "Global Multi-Store Synchronization",
+        "Legacy Data Migration (Orders/Customers)",
+        "Custom ERP/NetSuite Integration"
       ]
     }
   ];
@@ -1245,8 +1229,8 @@ const StoreDesignExpertise = () => {
               className="relative aspect-square rounded-[60px] overflow-hidden shadow-2xl"
             >
               <Image 
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200"
-                alt="Store Design"
+                src="https://uploads.onecompiler.io/444u7b3dy/44ns4y5dn/rokia-mockup-fYUupMoxu4Zh69SHFguzp2.webp"
+                alt="High-End Store Design Mockup"
                 fill
                 className="object-cover"
                 referrerPolicy="no-referrer"
@@ -1283,7 +1267,7 @@ const StoreResults = () => {
       metric: "$56.3K Total Sales",
       period: "Feb 20 - Mar 21, 2026",
       image: "https://picsum.photos/seed/shopify-dash-1/1000/600", // Fallback if input_file doesn't work
-      realImage: "/regenerated_image_1777556708521.png",
+      realImage: "https://uploads.onecompiler.io/444u7b3dy/44ns4y5dn/shopify-dashboard-c8ieAfamY5xtDJ2QVwQWRV.webp",
       description: "Optimized a high-volume store reaching $56k+ in monthly sales with 25k sessions."
     },
     {
@@ -1291,7 +1275,7 @@ const StoreResults = () => {
       metric: "$10,873.01 Daily Peak",
       period: "Yesterday Overview",
       image: "https://picsum.photos/seed/shopify-dash-2/1000/600",
-      realImage: "/regenerated_image_1777557398984.png",
+      realImage: "https://uploads.onecompiler.io/444u7b3dy/44ns4y5dn/WhatsApp%20Image%202026-04-18%20at%2008.38.30.jpeg",
       description: "Engineered a store capable of handling concentrated traffic peaks resulting in $10k+ daily revenue."
     },
     {
@@ -1299,7 +1283,7 @@ const StoreResults = () => {
       metric: "£1,470.44 Today",
       period: "Real-time Growth",
       image: "https://picsum.photos/seed/shopify-dash-3/1000/600",
-      realImage: "/regenerated_image_1777557402334.png",
+      realImage: "https://uploads.onecompiler.io/444u7b3dy/44ns4y5dn/WhatsApp%20Image%202026-04-18%20at%2008.38.30.jpeg",
       description: "Scaling international brands with localized Shopify Plus setups across different currencies."
     },
     {
@@ -1307,7 +1291,7 @@ const StoreResults = () => {
       metric: "2.78% Conv. Rate",
       period: "Optimization Phase",
       image: "https://picsum.photos/seed/shopify-dash-4/1000/600",
-      realImage: "/regenerated_image_1777573182730.png",
+      realImage: "https://uploads.onecompiler.io/444u7b3dy/44ns4y5dn/WhatsApp%20Image%202026-04-18%20at%2008.38.30.jpeg",
       description: "Implemented high-converting checkout flows and product page hooks to stabilize conversion over 2.5%."
     }
   ];
@@ -1871,9 +1855,9 @@ export default function Portfolio() {
       <SocialProofStrip />
       <About />
       <Services />
-      <Projects />
       <StoreDesignExpertise />
       <StoreResults />
+      <Projects />
       <Testimonials />
       <Contact />
       <Footer />
