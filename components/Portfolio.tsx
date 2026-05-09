@@ -270,7 +270,7 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/shopify-skincare/800/1600" 
+              src="https://images.unsplash.com/photo-1556742111-a301076d9d18?auto=format&fit=crop&q=80&w=800&h=1600" 
               alt="Shopify Skincare Store" 
               fill
               className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -291,7 +291,7 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="https://picsum.photos/seed/shopify-fashion/800/1600" 
+              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800&h=1600" 
               alt="Shopify Fashion Store" 
               fill
               className="object-cover"
@@ -312,7 +312,7 @@ const Hero = () => {
               <div className="w-8 h-1 rounded-full bg-white/10" />
             </div>
             <Image 
-              src="/regenerated_image_1777573182730.png" 
+              src="https://uploads.onecompiler.io/444u7b3dy/44ns33b38/ChatGPT%20Image%20Apr%2023,%202026,%2011_16_52%20PM.png" 
               alt="Shopify Tech Store" 
               fill
               className="object-cover"
@@ -632,69 +632,97 @@ const SocialProofStrip = () => {
   );
 };
 
+const SkillBar = ({ skill, percentage }: { skill: string; percentage: number }) => {
+  return (
+    <div className="mb-6">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-[13px] font-black uppercase tracking-widest text-white/80">{skill}</span>
+        <span className="text-[12px] font-black text-blue-400">{percentage}%</span>
+      </div>
+      <div className="h-2.5 w-full bg-[#1a1a1a] rounded-full overflow-hidden relative">
+        <motion.div 
+          initial={{ width: 0 }}
+          whileInView={{ width: `${percentage}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+          className="h-full bg-blue-500 rounded-full relative"
+        >
+          {/* Electric Glow */}
+          <div className="absolute top-0 right-0 bottom-0 w-8 bg-linear-to-r from-transparent to-blue-300/30 blur-sm" />
+          <div className="absolute inset-0 bg-linear-to-r from-blue-600 to-blue-400" />
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
 const About = () => {
   const skills = [
-    'Liquid', 'JavaScript', 'HTML5', 'CSS3', 'JSON', 'Technical SEO', 'CRO', 'API Integration'
+    { name: 'Liquid', level: 98 },
+    { name: 'JavaScript', level: 95 },
+    { name: 'HTML5', level: 99 },
+    { name: 'CSS3', level: 97 },
+    { name: 'Technical SEO', level: 92 },
+    { name: 'CRO', level: 94 },
+    { name: 'API Integration', level: 90 }
   ];
 
   return (
     <section id="about" className="py-24 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-display font-bold mb-8">The Technical Engine Behind <span className="text-blue-500">Digital Retail.</span></h2>
-            <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-              6+ years experience specializing in the technical engine of digital retail, fixing complex backend errors and optimizing site growth. I don&apos;t just build stores; I engineer sales machines.
+            <h2 className="text-4xl md:text-6xl font-display font-bold mb-8 leading-tight">The Technical Engine <br />Behind <span className="text-blue-500">Digital Retail.</span></h2>
+            <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-xl">
+              6+ years experience specializing in the technical engine of digital retail, fixing complex backend errors and optimizing site growth. I don&apos;t just build stores; I engineer sales machines that dominate their markets.
             </p>
             <div className="grid grid-cols-2 gap-6 mb-10">
-              <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
-                <div className="text-3xl font-bold text-blue-500 mb-1">6+</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider font-bold">Years Experience</div>
+              <div className="p-8 bg-white/5 rounded-[32px] border border-white/5 group hover:border-blue-500/30 transition-all duration-500">
+                <div className="text-4xl font-black text-blue-500 mb-2">6+</div>
+                <div className="text-xs text-gray-500 uppercase tracking-widest font-black">Years Experience</div>
               </div>
-              <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
-                <div className="text-3xl font-bold text-blue-500 mb-1">150+</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider font-bold">Stores Optimized</div>
+              <div className="p-8 bg-white/5 rounded-[32px] border border-white/5 group hover:border-blue-500/30 transition-all duration-500">
+                <div className="text-4xl font-black text-blue-500 mb-2">150+</div>
+                <div className="text-xs text-gray-500 uppercase tracking-widest font-black">Stores Optimized</div>
               </div>
+            </div>
+
+            <div className="flex gap-4">
+              <a href="#" className="p-3 bg-white/5 rounded-2xl hover:bg-blue-600 hover:text-white transition-all duration-300 border border-white/5"><Linkedin size={20} /></a>
+              <a href="#" className="p-3 bg-white/5 rounded-2xl hover:bg-blue-600 hover:text-white transition-all duration-300 border border-white/5"><Github size={20} /></a>
+              <a href="mailto:ezendukas1@gmail.com" className="p-3 bg-white/5 rounded-2xl hover:bg-blue-600 hover:text-white transition-all duration-300 border border-white/5"><Mail size={20} /></a>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-[#121212] p-8 rounded-3xl border border-white/10"
+            className="bg-[#111111] p-10 md:p-16 rounded-[48px] border border-white/5 relative overflow-hidden"
           >
-            <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-              <CheckCircle2 className="text-blue-500" />
-              Core Technical Stack
+            {/* Background Glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-[100px] pointer-events-none" />
+            
+            <h3 className="text-2xl font-bold mb-10 flex items-center gap-3">
+              <Zap className="text-blue-500" />
+              Technical Prowess
             </h3>
-            <div className="flex flex-wrap gap-3">
+            
+            <div className="space-y-2">
               {skills.map((skill) => (
-                <span 
-                  key={skill}
-                  className="px-4 py-2 bg-white/5 rounded-lg text-sm font-medium border border-white/5 hover:border-blue-500/50 transition-colors"
-                >
-                  {skill}
-                </span>
+                <SkillBar key={skill.name} skill={skill.name} percentage={skill.level} />
               ))}
             </div>
-            
-            <div className="mt-10 pt-8 border-t border-white/10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold">AS</div>
-                <div>
-                  <div className="font-bold">Alex Smart Hub</div>
-                  <div className="text-sm text-gray-500">Senior Shopify Developer</div>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-blue-600 transition-colors"><Linkedin size={18} /></a>
-                <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-blue-600 transition-colors"><Github size={18} /></a>
-                <a href="mailto:ezendukas1@gmail.com" className="p-2 bg-white/5 rounded-full hover:bg-blue-600 transition-colors"><Mail size={18} /></a>
+
+            <div className="mt-12 pt-10 border-t border-white/5 flex items-center gap-5">
+              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-xl font-black shadow-xl shadow-blue-500/20">AS</div>
+              <div>
+                <div className="text-lg font-bold text-white">Alex Smart Hub</div>
+                <div className="text-[11px] text-gray-500 uppercase font-bold tracking-widest">Senior Shopify Solutions Architect</div>
               </div>
             </div>
           </motion.div>
@@ -772,16 +800,28 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -12 }}
+              whileHover="hover"
+              variants={{
+                hover: { y: -12 }
+              }}
               className="group relative bg-[#1a1a1a] p-8 rounded-[32px] border border-white/5 hover:border-blue-500/30 transition-all duration-500 flex flex-col h-full overflow-hidden"
             >
               {/* Background Glow */}
               <div className="absolute inset-0 bg-linear-to-br from-blue-600/0 via-transparent to-blue-600/0 group-hover:from-blue-600/10 group-hover:to-blue-600/5 transition-all duration-700 pointer-events-none" />
               <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-600/0 group-hover:bg-blue-600/10 rounded-full blur-3xl transition-all duration-700 pointer-events-none" />
 
-              <div className={`relative z-10 w-14 h-14 ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-115 group-hover:-translate-y-1 transition-all duration-500`}>
+              <motion.div 
+                variants={{
+                  hover: { 
+                    rotate: [0, -15, 15, -15, 0],
+                    scale: 1.15,
+                    transition: { duration: 0.6, ease: "easeInOut" }
+                  }
+                }}
+                className={`relative z-10 w-14 h-14 ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg transition-all duration-500`}
+              >
                 {service.icon}
-              </div>
+              </motion.div>
               <h3 className="relative z-10 text-xl font-bold mb-4 leading-tight group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-500 origin-left">
                 {service.title}
               </h3>
@@ -799,135 +839,341 @@ const Services = () => {
   );
 };
 
+const ProjectModal = ({ project, isOpen, onClose }: { project: any; isOpen: boolean; onClose: () => void }) => {
+  if (!project) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
+        >
+          {/* Backdrop */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-black/90 backdrop-blur-2xl" 
+          />
+
+          {/* Modal Content */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="relative w-full max-w-6xl max-h-[90vh] bg-[#0d0d0d] rounded-[48px] border border-white/10 overflow-hidden shadow-2xl flex flex-col md:flex-row"
+          >
+            {/* Close Button */}
+            <button 
+              onClick={onClose}
+              className="absolute top-6 right-6 z-50 p-3 bg-white/5 hover:bg-white/10 rounded-full text-white transition-all border border-white/10"
+            >
+              <X size={24} />
+            </button>
+
+            {/* left column: Image */}
+            <div className="md:w-3/5 relative h-[300px] md:h-auto overflow-hidden bg-gray-900">
+              <Image 
+                src={project.image} 
+                alt={project.title} 
+                fill
+                className="object-cover"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-[#0d0d0d] via-transparent to-transparent md:bg-linear-to-r" />
+            </div>
+
+            {/* Right column: Info */}
+            <div className="md:w-2/5 p-10 md:p-16 flex flex-col h-full overflow-y-auto">
+              <div className="mb-10">
+                <div className="inline-flex px-5 py-2 bg-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest text-white mb-6">
+                  {project.category}
+                </div>
+                <h3 className="text-4xl md:text-5xl font-display font-black text-white mb-6 leading-tight tracking-tighter">
+                  {project.title}
+                </h3>
+                <p className="text-xl text-gray-400 leading-relaxed font-medium">
+                  {project.longDescription || project.description}
+                </p>
+              </div>
+
+              <div className="space-y-8 mb-12">
+                <div className="p-8 bg-white/5 rounded-3xl border border-white/5">
+                  <h4 className="text-sm font-black uppercase tracking-widest text-blue-500 mb-6 flex items-center gap-2">
+                    <Zap size={16} /> Key Technical Features
+                  </h4>
+                  <ul className="space-y-4">
+                    {(project.features || [
+                      "Custom Shopify Liquid Architecture",
+                      "Advanced Conversion Hooks",
+                      "High-Speed Performance Engineering",
+                      "Third-Party API Integration"
+                    ]).map((feature: string, idx: number) => (
+                      <li key={idx} className="flex gap-3 text-sm text-gray-300 font-bold leading-relaxed">
+                        <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex gap-8">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Views</span>
+                    <span className="text-lg font-black text-white">{project.views}</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Appreciations</span>
+                    <span className="text-lg font-black text-white">{project.appreciations}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-auto flex flex-col sm:flex-row gap-4">
+                <a 
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 px-8 py-5 bg-white text-black rounded-2xl font-black text-center flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all shadow-xl shadow-white/5"
+                >
+                  Live Preview <ExternalLink size={20} />
+                </a>
+                <button className="flex-1 px-8 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-black text-center hover:bg-white/10 transition-all">
+                  Full Case Study
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+
+  const filterCategories = ['All', 'Shopify Development', 'CRO', 'API Integration', 'UI/UX Design'];
+
   const projects = [
     {
-      title: "Sopotex",
-      url: "https://sopotex.eu/",
+      title: "Ice Wood",
+      url: "https://ice-wood.com/",
       description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
       image: "/regenerated_image_1777556708521.png",
       views: "12.4k",
-      appreciations: "842"
+      appreciations: "842",
+      category: "Shopify Development",
+      longDescription: "A comprehensive Shopify overhaul for a premium lifestyle brand focused on ice-related products. The project involved a complete Liquid architecture redesign to support complex product variations and international scaling.",
+      features: [
+        "Advanced Liquid Multi-Currency Setup",
+        "PageSpeed Optimization (90+ Mobile)",
+        "Custom Product Bundling Logic",
+        "Klaviyo Advanced Flow Integration"
+      ]
     },
     {
-      title: "Wilkinson & Rivera",
-      url: "https://www.wilkinson-rivera.com/",
-      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
+      title: "Pretty Girl Collection",
+      url: "https://prettygirlcollection.com/",
+      description: "Custom Shopify theme development for a high-end fashion brand with advanced filtering.",
       image: "/regenerated_image_1777557398984.png",
-      views: "8.9k",
-      appreciations: "560"
-    },
-    {
-      title: "Rokia Jewelries",
-      url: "https://rokiajewelries.com/",
-      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "/regenerated_image_1777557402334.png",
-      views: "15.2k",
-      appreciations: "1.2k"
-    },
-    {
-      title: "Hey Pretty Beauty",
-      url: "https://www.heyprettybeauty.com/",
-      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/hey-pretty-beauty-mockup/800/600",
       views: "18.1k",
-      appreciations: "1.5k"
+      appreciations: "1.5k",
+      category: "UI/UX Design",
+      longDescription: "Engineered a high-end fashion destination that combines editorial aesthetics with aggressive conversion optimization. Custom collection filters and a bespoke mobile navigation system were key highlights.",
+      features: [
+        "Interactive Size & Fit Guide",
+        "Besopke Cart Drawer with Cross-sells",
+        "Infinite Scroll & Dynamic Filtering",
+        "High-Fidelity UI Micro-animations"
+      ]
     },
     {
-      title: "Cognvita",
-      url: "https://cognvita.com",
-      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/cognvita-mockup/800/600",
-      views: "6.7k",
-      appreciations: "420"
+      title: "Atoms",
+      url: "https://atoms.com/",
+      description: "Complex Shopify Plus optimization and technical performance engineering for scale.",
+      image: "/regenerated_image_1777557402334.png",
+      views: "24.2k",
+      appreciations: "2.1k",
+      category: "Shopify Development",
+      longDescription: "Worked on technical scaling for Atoms, a major footwear retailer. Focused on headless integrations and custom API developments to streamline their complex logistical backend with Shopify Plus.",
+      features: [
+        "Shopify Plus Scripts Optimization",
+        "Headless Commerce Transitioning",
+        "Custom Warehouse API Hook",
+        "Subscription Model Engineering"
+      ]
     },
     {
-      title: "Rays Online Store",
-      url: "https://raysonlinestore.com/",
-      description: "Shopify setup, product optimization, SEO, and conversion rate improvements.",
-      image: "https://picsum.photos/seed/rays-online-store-mockup/800/600",
+      title: "Sleek Fits",
+      url: "https://sleekfits.com/",
+      description: "Product page optimization and conversion-focused design for activewear brand.",
+      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac00bd?auto=format&fit=crop&q=80&w=800&h=800",
+      views: "15.7k",
+      appreciations: "1.2k",
+      category: "CRO",
+      longDescription: "Dedicated CRO sprint for an activewear giant. We analyzed over 100k user sessions to identify friction points and implemented a science-backed UI redesign of the product single pages.",
+      features: [
+        "Social Proof Overlay System",
+        "One-Page Checkout Optimization",
+        "Trust Badge Dynamic Generation",
+        "Hotjar Session-based UI Tweaks"
+      ]
+    },
+    {
+      title: "Cognivita",
+      url: "https://cognivita.com",
+      description: "Brand identity and custom Shopify setup for a innovative wellness brand.",
+      image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800&h=800",
       views: "9.3k",
-      appreciations: "610"
+      appreciations: "610",
+      category: "Shopify Development",
+      longDescription: "Building a brand from 0 to 1. Cognivita required a design system that projected scientific authority and modern wellness. We delivered a custom Shopify theme that serves both purposes perfectly.",
+      features: [
+        "Custom Graphic Design System",
+        "Health-Claims Compliant UI",
+        "Subscription Management Suite",
+        "Affiliate Dashboard Integration"
+      ]
+    },
+    {
+      title: "HC More",
+      url: "https://hcmore.nl/",
+      description: "Technical SEO and speed optimization for a leading Dutch beauty retailer.",
+      image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800&h=800",
+      views: "8.9k",
+      appreciations: "560",
+      category: "CRO",
+      longDescription: "European beauty retail optimization. HC More required a localized Shopify setup for the Dutch market with a heavy focus on technical SEO to displace established competitors.",
+      features: [
+        "Localized Shopify Plus Multilingual",
+        "Schema.org Semantic Markup",
+        "iDEAL Payment Gateway Fine-tuning",
+        "EU Cookie & GDPR Compliance Suite"
+      ]
+    },
+    {
+      title: "Watch Sights",
+      url: "https://watchsights.com/",
+      description: "Custom watch configuration tool and landing page development on Shopify.",
+      image: "/regenerated_image_1777573182730.png",
+      views: "11.2k",
+      appreciations: "940",
+      category: "API Integration",
+      longDescription: "The crown jewel of technical execution. We built a real-time reactive watch customizer using React and Liquid, allowing users to build their own watches and purchase them as a single Shopify SKU.",
+      features: [
+        "Real-time SVG Composition Engine",
+        "Dynamic SKU Pricing Logic",
+        "3D Product Render Integration",
+        "Client-Side Performance Tuning"
+      ]
     }
   ];
+
+  const filteredProjects = activeFilter === 'All' 
+    ? projects 
+    : projects.filter(p => p.category === activeFilter);
 
   return (
     <section id="work" className="py-24 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Featured <span className="text-blue-500">Work.</span></h2>
-            <p className="text-gray-400">A selection of high-performance digital products.</p>
-          </div>
-          <div className="flex gap-4">
-            <button className="px-6 py-2 rounded-full border border-white/10 text-sm font-bold hover:bg-white/5 transition-all">All Projects</button>
-            <button className="px-6 py-2 rounded-full bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-all">Shopify Stores</button>
+        <div className="flex flex-col mb-16 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Selected <span className="text-blue-500">Client Work.</span></h2>
+            <p className="text-gray-400">A snapshot of Shopify stores I&apos;ve built, optimized, and scaled.</p>
+          </motion.div>
+          
+          <div className="flex flex-wrap gap-2 md:gap-4">
+            {filterCategories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveFilter(category)}
+                className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
+                  activeFilter === category 
+                    ? 'bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-500/20' 
+                    : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10 hover:border-white/20'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ 
-                duration: 0.8, 
-                delay: index * 0.1,
-                ease: [0.21, 0.47, 0.32, 0.98]
-              }}
-              className="group"
-            >
-              <a 
-                href={project.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block cursor-pointer"
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                layout
+                key={project.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="group"
               >
-                <div className="relative aspect-4/3 overflow-hidden rounded-3xl mb-6 bg-[#1a1a1a]">
-                  <Image 
-                    src={project.image} 
-                    alt={project.title} 
-                    fill
-                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                    referrerPolicy="no-referrer"
-                  />
-                  
-                  {/* Behance-style Overlay */}
-                  <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px] flex flex-col items-center justify-center">
-                    <div className="flex gap-6">
-                      <div className="flex flex-col items-center gap-2 text-white">
-                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                          <Eye size={20} />
-                        </div>
-                        <span className="text-xs font-bold uppercase tracking-widest">{project.views}</span>
+                <div 
+                  onClick={() => setSelectedProject(project)}
+                  className="block cursor-pointer bg-white rounded-[40px] border border-black/5 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 p-1"
+                >
+                  <div className="relative aspect-video overflow-hidden rounded-[36px] bg-gray-50 border border-black/5">
+                    <Image 
+                      src={project.image} 
+                      alt={project.title} 
+                      fill
+                      className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                    
+                    {/* Category Tag */}
+                    <div className="absolute top-6 left-6 z-10 px-5 py-2 bg-white rounded-full text-[10px] font-black uppercase tracking-widest text-black shadow-xl shadow-black/5 border border-black/5">
+                      {project.category}
+                    </div>
+  
+                    {/* Icon Button (Bottom Right) */}
+                    <div className="absolute bottom-6 right-6 z-10 w-12 h-12 bg-black rounded-full flex items-center justify-center text-white border border-white/10 shadow-2xl transition-transform group-hover:rotate-45">
+                      <ArrowRight size={20} />
+                    </div>
+                  </div>
+  
+                  <div className="pt-8 pb-10 px-8">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-2xl font-black text-black tracking-tight">{project.title}</h3>
+                      <div className="w-10 h-10 rounded-full bg-gray-50 border border-black/5 flex items-center justify-center">
+                        <ChevronRight size={18} className="text-black/20" />
                       </div>
-                      <div className="flex flex-col items-center gap-2 text-white">
-                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                          <ThumbsUp size={20} />
-                        </div>
-                        <span className="text-xs font-bold uppercase tracking-widest">{project.appreciations}</span>
-                      </div>
+                    </div>
+                    <div className="text-[13px] text-black/40 mb-4 font-bold tracking-tight">{new URL(project.url).hostname}</div>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-8 h-12 line-clamp-2 font-medium">{project.description}</p>
+                    
+                    <div className="flex items-center gap-2 text-emerald-600 text-[14px] font-black tracking-tighter hover:gap-3 transition-all">
+                      View Technical Breakdown <ChevronRight size={16} />
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-between items-start px-2">
-                  <div>
-                    <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-blue-500 transition-colors">{project.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-4">{project.description}</p>
-                    <div 
-                      className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-full text-sm font-bold hover:bg-blue-700 transition-all"
-                    >
-                      View Project <ExternalLink size={14} />
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
+
+      <ProjectModal 
+        project={selectedProject} 
+        isOpen={selectedProject !== null} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </section>
   );
 };
@@ -999,7 +1245,7 @@ const StoreDesignExpertise = () => {
               className="relative aspect-square rounded-[60px] overflow-hidden shadow-2xl"
             >
               <Image 
-                src="https://picsum.photos/seed/shopify-design-hero/1200/1200"
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200"
                 alt="Store Design"
                 fill
                 className="object-cover"
@@ -1037,7 +1283,7 @@ const StoreResults = () => {
       metric: "$56.3K Total Sales",
       period: "Feb 20 - Mar 21, 2026",
       image: "https://picsum.photos/seed/shopify-dash-1/1000/600", // Fallback if input_file doesn't work
-      realImage: "/input_file_0.png",
+      realImage: "/regenerated_image_1777556708521.png",
       description: "Optimized a high-volume store reaching $56k+ in monthly sales with 25k sessions."
     },
     {
@@ -1045,7 +1291,7 @@ const StoreResults = () => {
       metric: "$10,873.01 Daily Peak",
       period: "Yesterday Overview",
       image: "https://picsum.photos/seed/shopify-dash-2/1000/600",
-      realImage: "/input_file_1.png",
+      realImage: "/regenerated_image_1777557398984.png",
       description: "Engineered a store capable of handling concentrated traffic peaks resulting in $10k+ daily revenue."
     },
     {
@@ -1053,7 +1299,7 @@ const StoreResults = () => {
       metric: "£1,470.44 Today",
       period: "Real-time Growth",
       image: "https://picsum.photos/seed/shopify-dash-3/1000/600",
-      realImage: "/input_file_2.png",
+      realImage: "/regenerated_image_1777557402334.png",
       description: "Scaling international brands with localized Shopify Plus setups across different currencies."
     },
     {
@@ -1061,7 +1307,7 @@ const StoreResults = () => {
       metric: "2.78% Conv. Rate",
       period: "Optimization Phase",
       image: "https://picsum.photos/seed/shopify-dash-4/1000/600",
-      realImage: "/input_file_3.png",
+      realImage: "/regenerated_image_1777573182730.png",
       description: "Implemented high-converting checkout flows and product page hooks to stabilize conversion over 2.5%."
     }
   ];
@@ -1266,13 +1512,43 @@ const Testimonials = () => {
       role: "CEO, TechTrend",
       content: "Alex's contribution to our Shopify store's success cannot be overstated. He's an expert in every sense of the word.",
       avatar: "https://picsum.photos/seed/user23/100/100"
+    },
+    {
+      name: "Lily Nguyen",
+      role: "Founder, Bloom Digital",
+      content: "The custom checkout extensions Alex built for us have significantly reduced friction and increased our conversion rate by 12%.",
+      avatar: "https://picsum.photos/seed/user24/100/100"
+    },
+    {
+      name: "Ryan Baxter",
+      role: "COO, SwiftShip",
+      content: "Integrating our custom logistics system with Shopify was a nightmare until Alex stepped in. Flawless execution.",
+      avatar: "https://picsum.photos/seed/user25/100/100"
+    },
+    {
+      name: "Jessica Wu",
+      role: "E-comm Manager, Mode",
+      content: "Alex's attention to mobile performance is incredible. Our PageSpeed score went from 40 to 95+ overnight.",
+      avatar: "https://picsum.photos/seed/user26/100/100"
+    },
+    {
+      name: "Michael Ross",
+      role: "Owner, Ross Custom",
+      content: "The best Shopify developer I have worked with. Clean code, great communication, and real results.",
+      avatar: "https://picsum.photos/seed/user27/100/100"
+    },
+    {
+      name: "Linda Carter",
+      role: "Marketing Director, Aura",
+      content: "Transformed our store into a high-converting machine. The new checkout flow is seamless.",
+      avatar: "https://picsum.photos/seed/user28/100/100"
     }
   ];
 
   // Split testimonials into three rows for a marquee effect
-  const row1 = testimonials.slice(0, 8);
-  const row2 = testimonials.slice(8, 16);
-  const row3 = testimonials.slice(16);
+  const row1 = testimonials.slice(0, 9);
+  const row2 = testimonials.slice(9, 18);
+  const row3 = testimonials.slice(18);
 
   return (
     <section id="testimonials" className="py-24 bg-black overflow-hidden">
