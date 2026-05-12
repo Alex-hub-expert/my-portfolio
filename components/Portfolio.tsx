@@ -33,7 +33,21 @@ import {
   Search,
   Truck,
   Target,
-  Headphones
+  Headphones,
+  MessageSquare,
+  Send,
+  SendHorizontal,
+  Bot,
+  User,
+  Sparkles,
+  ArrowUpRight,
+  TrendingUp,
+  Globe,
+  Settings2,
+  Package,
+  Layers,
+  Layout,
+  MousePointer2
 } from 'lucide-react';
 
 // --- Components ---
@@ -325,6 +339,145 @@ const Hero = () => {
   );
 };
 
+const ChatWidget = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [chatHistory, setChatHistory] = useState([
+    { role: 'bot', text: "Hi! I'm Alex's AI assistant. How can I help you scale your Shopify store today?" }
+  ]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [chatHistory, isOpen]);
+
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!message.trim()) return;
+
+    const userMsg = { role: 'user', text: message };
+    setChatHistory(prev => [...prev, userMsg]);
+    setMessage('');
+
+    // Simulate bot response
+    setTimeout(() => {
+      setChatHistory(prev => [...prev, { 
+        role: 'bot', 
+        text: "Thanks for reaching out! I've noted your message. Alex or one of our team members will get back to you shortly. Would you like to schedule a quick call instead?" 
+      }]);
+    }, 1000);
+  };
+
+  return (
+    <div className="fixed bottom-8 right-8 z-[100]">
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9, transformOrigin: 'bottom right' }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.9 }}
+            className="mb-6 w-[350px] md:w-[400px] h-[500px] bg-[#1a1a1a] rounded-[32px] border border-white/10 shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl"
+          >
+            {/* Header */}
+            <div className="bg-blue-600 p-6 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
+                  <Bot className="text-blue-600" size={24} />
+                </div>
+                <div>
+                  <div className="text-white font-bold text-sm">Alex Smart Hub</div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                    <span className="text-[10px] text-white/70 font-bold uppercase tracking-wider">Online</span>
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={() => setIsOpen(false)}
+                className="text-white/60 hover:text-white p-2 hover:bg-white/10 rounded-xl transition-all"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Chat Body */}
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-4">
+              {chatHistory.map((chat, i) => (
+                <div 
+                  key={i} 
+                  className={`flex ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div className={`max-w-[80%] p-4 rounded-2xl text-[13px] leading-relaxed ${
+                    chat.role === 'user' 
+                      ? 'bg-blue-600 text-white rounded-tr-none' 
+                      : 'bg-white/5 text-gray-300 rounded-tl-none border border-white/5'
+                  }`}>
+                    {chat.text}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Input */}
+            <form onSubmit={handleSend} className="p-4 bg-white/5 border-t border-white/5">
+              <div className="relative">
+                <input 
+                  type="text" 
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Type your message..."
+                  className="w-full bg-[#0a0a0a] border border-white/10 rounded-2xl py-3 pl-4 pr-12 text-sm text-white focus:outline-none focus:border-blue-500/50 transition-all font-medium"
+                />
+                <button 
+                  type="submit"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-blue-500 hover:text-blue-400 transition-colors"
+                >
+                  <SendHorizontal size={20} />
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-2xl shadow-blue-500/40 border-4 border-[#0a0a0a] relative group"
+      >
+        <AnimatePresence mode="wait">
+          {isOpen ? (
+            <motion.div
+              key="close"
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+            >
+              <X size={28} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="chat"
+              initial={{ rotate: 90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: -90, opacity: 0 }}
+            >
+              <MessageSquare size={28} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Pulse Effect */}
+        {!isOpen && (
+          <div className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-20 pointer-events-none" />
+        )}
+      </motion.button>
+    </div>
+  );
+};
 const TrustBadges = () => {
   const badges = [
     {
@@ -672,7 +825,7 @@ const About = () => {
             className="relative aspect-[4/5] rounded-[48px] overflow-hidden shadow-2xl group"
           >
             <Image 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800&h=1000"
+              src="https://uploads.onecompiler.io/444u7b3dy/44ns33b38/ChatGPT%20Image%20Apr%2023,%202026,%2011_16_52%20PM.png"
               alt="Alex Smart Hub - Senior Shopify Solutions Architect"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -710,7 +863,7 @@ const Services = () => {
     {
       title: "Shopify Store Setup & Management",
       description: "End-to-end Shopify solutions, from initial configuration to daily operational management and scaling.",
-      icon: <ShoppingBag size={28} />,
+      icon: <Layout size={28} />,
       color: "bg-blue-600"
     },
     {
@@ -722,25 +875,25 @@ const Services = () => {
     {
       title: "SEO Optimization",
       description: "Technical and on-page SEO strategies to improve your organic rankings and search visibility.",
-      icon: <Search size={28} />,
+      icon: <TrendingUp size={28} />,
       color: "bg-emerald-600"
     },
     {
       title: "Product Page Optimization (CRO)",
       description: "Optimizing product descriptions, images, and layouts to maximize conversion rates and average order value.",
-      icon: <BarChart3 size={28} />,
+      icon: <Sparkles size={28} />,
       color: "bg-indigo-600"
     },
     {
       title: "Email Marketing",
       description: "Automated flows and targeted campaigns to nurture leads and increase customer lifetime value.",
-      icon: <Mail size={28} />,
+      icon: <Send size={28} />,
       color: "bg-purple-600"
     },
     {
       title: "Dropshipping Store Setup",
       description: "Specialized setups for dropshipping businesses, including supplier integration and automated fulfillment.",
-      icon: <Truck size={28} />,
+      icon: <Package size={28} />,
       color: "bg-orange-600"
     },
     {
@@ -1834,6 +1987,7 @@ export default function Portfolio() {
       <Testimonials />
       <Contact />
       <Footer />
+      <ChatWidget />
     </main>
   );
 }
