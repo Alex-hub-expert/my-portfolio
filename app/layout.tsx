@@ -20,7 +20,29 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${lexend.variable} dark`} suppressHydrationWarning>
-      <head />
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  if (typeof window !== 'undefined' && window.fetch) {
+                    var originalFetch = window.fetch;
+                    Object.defineProperty(window, 'fetch', {
+                      value: originalFetch,
+                      writable: true,
+                      configurable: true,
+                      enumerable: true
+                    });
+                  }
+                } catch (e) {
+                  console.warn("Could not patch window.fetch property:", e);
+                }
+              })();
+            `
+          }}
+        />
+      </head>
       <body className="bg-[#121212] text-gray-100 antialiased selection:bg-blue-500/30" suppressHydrationWarning>
         {children}
       </body>

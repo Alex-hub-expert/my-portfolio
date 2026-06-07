@@ -1,5 +1,6 @@
 {
   "name": "Alex Smart Hub Portfolio",
   "description": "Professional portfolio for Alex Smart Hub, Senior E-commerce Strategist & Shopify Developer.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

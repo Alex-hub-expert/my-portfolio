@@ -47,7 +47,9 @@ import {
   Package,
   Layers,
   Layout,
-  MousePointer2
+  MousePointer2,
+  Calendar,
+  Clock
 } from 'lucide-react';
 
 // --- Components ---
@@ -342,32 +344,216 @@ const Hero = () => {
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState([
-    { role: 'bot', text: "Hi! I'm Alex's AI assistant. How can I help you scale your Shopify store today?" }
+    { role: 'bot', text: "Hi! I'm Alex's AI assistant. Do you want to build a stunning custom Shopify theme, fix site errors, or speed up your store? Tell me about your store goals!" }
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Dynamic Consultation Scheduler states
+  const [isSchedulerOpen, setIsSchedulerOpen] = useState(false);
+  const [selectedDay, setSelectedDay] = useState<any>(null);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
+  const [schedulerName, setSchedulerName] = useState('');
+  const [schedulerStore, setSchedulerStore] = useState('');
+
+  // Helper: Get next 7 weekdays
+  const getNext7Days = () => {
+    const days = [];
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    for (let i = 1; i <= 7; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() + i);
+      days.push({
+        dayName: weekdays[d.getDay()],
+        dayNum: d.getDate(),
+        month: months[d.getMonth()],
+        fullYear: d.getFullYear(),
+        formattedDate: `${weekdays[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`
+      });
+    }
+    return days;
+  };
+
+  const calendarDays = getNext7Days();
+  const timeSlots = [
+    "09:30 AM",
+    "11:00 AM",
+    "12:30 PM",
+    "02:00 PM",
+    "03:30 PM",
+    "05:00 PM"
+  ];
+
+  const handleOpenScheduler = () => {
+    setSelectedDay(calendarDays[0]);
+    setSelectedTimeSlot(timeSlots[1]);
+    setIsSchedulerOpen(true);
+  };
+
+  const handleConfirmConsultation = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedDay || !selectedTimeSlot) return;
+
+    const templateMsg = `Hi Alex! 👋 I've scheduled a WhatsApp Consultation call from your portfolio site:
+📅 Date: ${selectedDay.formattedDate}, ${selectedDay.fullYear}
+⏰ Time: ${selectedTimeSlot}
+👤 Name: ${schedulerName || 'Not specified'}
+🛍️ Store/Goal: ${schedulerStore || 'Not specified'}
+
+Looking forward to discussing my project!`;
+
+    const encoded = encodeURIComponent(templateMsg);
+    window.open(`https://wa.me/447402174123?text=${encoded}`, '_blank');
+    
+    setChatHistory(prev => [
+      ...prev,
+      { role: 'user', text: `Scheduled WhatsApp Call: ${selectedDay.formattedDate} at ${selectedTimeSlot}` },
+      { role: 'bot', text: "Awesome! High-converting consultation slot selected. I've prepared your details and secured your slot. Let's talk over WhatsApp! 🚀" }
+    ]);
+    setIsSchedulerOpen(false);
+  };
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [chatHistory, isOpen]);
+  }, [chatHistory, isOpen, isLoading]);
+
+  const renderMessageText = (text: string) => {
+    const hasTrigger = text.includes('[BOOK_CALL_TRIGGER]');
+    const cleanText = text.replace('[BOOK_CALL_TRIGGER]', '');
+
+    const lines = cleanText.split('\n');
+    const contentJSX = lines.map((line, lineIdx) => {
+      // Split line by bold tags **text**
+      const parts = line.split(/(\*\*.*?\*\*)/g);
+      const content = parts.map((part, partIdx) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <strong key={partIdx} className="font-bold text-white">{part.slice(2, -2)}</strong>;
+        }
+
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        const subParts = part.split(urlRegex);
+        return subParts.map((subPart, subPartIdx) => {
+          if (urlRegex.test(subPart)) {
+            let href = subPart;
+            if (subPart.endsWith('.') || subPart.endsWith(',')) {
+              href = subPart.slice(0, -1);
+            }
+            const isWhatsApp = href.includes('wa.me');
+            return (
+              <a 
+                key={subPartIdx} 
+                href={href} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`font-semibold underline hover:text-blue-300 transition-all mx-1 ${
+                  isWhatsApp ? 'text-emerald-400 font-bold border-b border-emerald-500/30 pb-0.5' : 'text-blue-400 border-b border-blue-500/30'
+                }`}
+              >
+                {isWhatsApp ? 'WhatsApp Chat 💬' : 'Link 🔗'}
+              </a>
+            );
+          }
+          return subPart;
+        });
+      });
+
+      return (
+        <div key={lineIdx} className={lineIdx > 0 ? "mt-2" : ""}>
+          {content}
+        </div>
+      );
+    });
+
+    if (hasTrigger) {
+      return (
+        <div className="space-y-3">
+          <div>{contentJSX}</div>
+          <button
+            type="button"
+            onClick={handleOpenScheduler}
+            className="w-full mt-2 py-2.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 active:scale-[0.98] text-white text-[12px] font-black rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 cursor-pointer"
+          >
+            <Calendar size={14} /> Schedule WhatsApp Call
+          </button>
+        </div>
+      );
+    }
+
+    return contentJSX;
+  };
+
+  const sendQuery = async (userText: string) => {
+    if (isLoading) return;
+    setIsLoading(true);
+
+    const updatedHistory = [...chatHistory, { role: 'user', text: userText }];
+    setChatHistory(updatedHistory);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          history: chatHistory,
+          message: userText,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Fetch failed');
+      }
+
+      const data = await response.json();
+      setChatHistory(prev => [...prev, { role: 'bot', text: data.text }]);
+    } catch (error) {
+      console.error(error);
+      setChatHistory(prev => [
+        ...prev,
+        { 
+          role: 'bot', 
+          text: "I had a temporary connection hiccup! Please message Alex directly on WhatsApp: https://wa.me/447402174123 or submit the contact form below!" 
+        }
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!message.trim()) return;
-
-    const userMsg = { role: 'user', text: message };
-    setChatHistory(prev => [...prev, userMsg]);
+    if (!message.trim() || isLoading) return;
+    const currentMsg = message;
     setMessage('');
+    sendQuery(currentMsg);
+  };
 
-    // Simulate bot response
-    setTimeout(() => {
-      setChatHistory(prev => [...prev, { 
-        role: 'bot', 
-        text: "Thanks for reaching out! I've noted your message. Alex or one of our team members will get back to you shortly. Would you like to schedule a quick call instead?" 
-      }]);
-    }, 1000);
+  const suggestionPills = [
+    { label: "📅 Schedule WhatsApp Call", action: "schedule" },
+    { label: "💬 WhatsApp Us", action: "whatsapp" },
+    { label: "⚡ Speed Booster", text: "How can we optimize my store's loading speed?" },
+    { label: "🛠️ Fix Errors", text: "I have some checkout bugs and backend issues. Can you help?" }
+  ];
+
+  const handlePillClick = (pill: typeof suggestionPills[0]) => {
+    if (pill.action === 'schedule') {
+      handleOpenScheduler();
+    } else if (pill.action === 'whatsapp') {
+      window.open("https://wa.me/447402174123?text=Hi%20Alex!%20I'm%20visiting%20your%20portfolio%20and%20want%20to%20chat%20about%20speeding%20up%20or%20optimizing%20my%20Shopify%20store.", "_blank");
+      setChatHistory(prev => [
+        ...prev,
+        { role: 'user', text: "Opening WhatsApp chat..." },
+        { role: 'bot', text: "Perfect! Reaching out on WhatsApp. I have opened it in a new window to start details. Talk with you there! 📱" }
+      ]);
+    } else if (pill.text) {
+      sendQuery(pill.text);
+    }
   };
 
   return (
@@ -378,67 +564,262 @@ const ChatWidget = () => {
             initial={{ opacity: 0, y: 50, scale: 0.9, transformOrigin: 'bottom right' }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            className="mb-6 w-[350px] md:w-[400px] h-[500px] bg-[#1a1a1a] rounded-[32px] border border-white/10 shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl"
+            className="mb-6 w-[350px] md:w-[400px] h-[520px] bg-[#1a1a1a] rounded-[32px] border border-white/10 shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl"
           >
             {/* Header */}
-            <div className="bg-blue-600 p-6 flex justify-between items-center">
+            <div className="bg-blue-600 p-6 flex justify-between items-center shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg">
                   <Bot className="text-blue-600" size={24} />
                 </div>
                 <div>
-                  <div className="text-white font-bold text-sm">Alex Smart Hub</div>
+                  <div className="text-white font-bold text-sm">Alex's Assistant</div>
                   <div className="flex items-center gap-1.5">
                     <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                    <span className="text-[10px] text-white/70 font-bold uppercase tracking-wider">Online</span>
+                    <span className="text-[10px] text-white/70 font-black uppercase tracking-widest">Real-time AI</span>
                   </div>
                 </div>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="text-white/60 hover:text-white p-2 hover:bg-white/10 rounded-xl transition-all"
+                className="text-white/60 hover:text-white p-2 hover:bg-white/15 rounded-xl transition-all"
               >
                 <X size={20} />
               </button>
             </div>
 
+            {/* Quick Connect Bar */}
+            <div className="bg-emerald-500/10 border-b border-white/5 px-4 py-2.5 flex items-center justify-between gap-1.5 shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="text-[11px] text-zinc-300 font-bold uppercase tracking-wider truncate">Need quick response?</span>
+              </div>
+              <a 
+                href="https://wa.me/447402174123?text=Hi%20Alex!%20I'm%20on%20your%20Shopify%20portfolio%20and%20want%20to%20discuss%20working%20together%20on%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  setChatHistory(prev => [
+                    ...prev,
+                    { role: 'user', text: "Opening Quick Connect WhatsApp..." },
+                    { role: 'bot', text: "Excellent choice! I've launched direct WhatsApp messaging with a pre-filled template to discuss your Shopify store goals with Alex. Chat right there! 💬" }
+                  ]);
+                }}
+                className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-[11px] font-black rounded-lg transition-all flex items-center gap-1 shadow-lg shadow-emerald-500/10 whitespace-nowrap"
+              >
+                <Phone size={10} className="fill-white" /> Quick Connect
+              </a>
+            </div>
+
             {/* Chat Body */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-4">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
               {chatHistory.map((chat, i) => (
                 <div 
                   key={i} 
                   className={`flex ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[80%] p-4 rounded-2xl text-[13px] leading-relaxed ${
+                  <div className={`max-w-[85%] p-4 rounded-2xl text-[13px] leading-relaxed font-medium ${
                     chat.role === 'user' 
-                      ? 'bg-blue-600 text-white rounded-tr-none' 
+                      ? 'bg-blue-600 text-white rounded-tr-none shadow-md' 
                       : 'bg-white/5 text-gray-300 rounded-tl-none border border-white/5'
                   }`}>
-                    {chat.text}
+                    {renderMessageText(chat.text)}
                   </div>
                 </div>
               ))}
+              
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-white/5 border border-white/5 p-4 rounded-2xl rounded-tl-none max-w-[80%] flex items-center gap-1.5">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Input */}
-            <form onSubmit={handleSend} className="p-4 bg-white/5 border-t border-white/5">
+            {/* Suggestion Pills */}
+            <div className="px-4 py-2 border-t border-white/5 bg-white/[0.02] flex gap-2 overflow-x-auto scrollbar-none shrink-0 scroll-smooth">
+              {suggestionPills.map((pill, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => handlePillClick(pill)}
+                  className="px-3 py-1.5 bg-white/5 border border-white/10 hover:bg-blue-600/20 hover:border-blue-500/30 rounded-full text-[11px] font-bold text-gray-300 hover:text-white transition-all whitespace-nowrap active:scale-95"
+                >
+                  {pill.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Input Form */}
+            <form onSubmit={handleSend} className="p-4 bg-white/5 border-t border-white/5 shrink-0">
               <div className="relative">
                 <input 
                   type="text" 
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Type your message..."
-                  className="w-full bg-[#0a0a0a] border border-white/10 rounded-2xl py-3 pl-4 pr-12 text-sm text-white focus:outline-none focus:border-blue-500/50 transition-all font-medium"
+                  disabled={isLoading}
+                  placeholder={isLoading ? "Alex's AI assistant is typing..." : "Explain your Shopify store goal..."}
+                  className="w-full bg-[#0a0a0a]/80 border border-white/10 rounded-2xl py-3 pl-4 pr-12 text-sm text-white focus:outline-none focus:border-blue-500/50 transition-all font-medium disabled:opacity-50"
                 />
                 <button 
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-blue-500 hover:text-blue-400 transition-colors"
+                  disabled={isLoading}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-blue-500 hover:text-blue-400 transition-colors disabled:opacity-30"
                 >
                   <SendHorizontal size={20} />
                 </button>
               </div>
             </form>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Dynamic Consultation Scheduler Modal */}
+      <AnimatePresence>
+        {isSchedulerOpen && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsSchedulerOpen(false)}
+              className="absolute inset-0 bg-black/85 backdrop-blur-md"
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-lg bg-[#141414] border border-white/10 rounded-[32px] p-6 shadow-2xl flex flex-col max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10"
+            >
+              <button
+                type="button"
+                onClick={() => setIsSchedulerOpen(false)}
+                className="absolute top-6 right-6 text-zinc-400 hover:text-white p-2 hover:bg-white/10 rounded-full transition-all"
+              >
+                <X size={18} />
+              </button>
+
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-emerald-500/15 text-emerald-400 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/5">
+                  <Calendar size={22} className="stroke-[2.5]" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-white text-lg tracking-tight">Schedule WhatsApp Call</h3>
+                  <p className="text-xs text-zinc-400">Lock in your free 30-min e-commerce scaling consultation.</p>
+                </div>
+              </div>
+
+              <form onSubmit={handleConfirmConsultation} className="space-y-5">
+                {/* 1. Date Selection */}
+                <div>
+                  <label className="block text-xs font-black uppercase text-zinc-400 tracking-wider mb-2.5">
+                    Select Consultation Date
+                  </label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {calendarDays.map((day, idx) => {
+                      const isSelected = selectedDay && selectedDay.formattedDate === day.formattedDate;
+                      return (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setSelectedDay(day)}
+                          className={`flex flex-col items-center justify-center p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/25 scale-[1.03]'
+                              : 'bg-white/[0.02] border-white/5 text-zinc-300 hover:border-white/15'
+                          }`}
+                        >
+                          <span className="text-[10px] font-bold uppercase tracking-wider opacity-60">
+                            {day.dayName}
+                          </span>
+                          <span className="text-base font-black tracking-tight my-0.5">
+                            {day.dayNum}
+                          </span>
+                          <span className="text-[9px] font-bold uppercase tracking-widest opacity-60">
+                            {day.month}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* 2. Time Slot Selection */}
+                <div>
+                  <label className="block text-xs font-black uppercase text-zinc-400 tracking-wider mb-2.5">
+                    Select Available Time Slot (GMT)
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {timeSlots.map((slot, idx) => {
+                      const isSelected = selectedTimeSlot === slot;
+                      return (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setSelectedTimeSlot(slot)}
+                          className={`py-2 px-3 text-center rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/25 scale-[1.02]'
+                              : 'bg-white/[0.02] border-white/5 text-zinc-300 hover:border-white/15'
+                          }`}
+                        >
+                          {slot}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* 3. Basic Lead Details */}
+                <div className="space-y-3.5 pt-1">
+                  <div>
+                    <label className="block text-xs font-black uppercase text-zinc-400 tracking-wider mb-1.5">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Sarah Jenkins"
+                      value={schedulerName}
+                      onChange={(e) => setSchedulerName(e.target.value)}
+                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-blue-500 transition-all font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-black uppercase text-zinc-400 tracking-wider mb-1.5">
+                      Your Shopify Store URL or Business Challenge
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. shopify-brand.com / conversion drops"
+                      value={schedulerStore}
+                      onChange={(e) => setSchedulerStore(e.target.value)}
+                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-blue-500 transition-all font-semibold"
+                    />
+                  </div>
+                </div>
+
+                {/* 4. Action Submit Button */}
+                <button
+                  type="submit"
+                  className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 active:scale-[0.99] cursor-pointer mt-4"
+                >
+                  <Phone size={14} className="fill-white" /> Book Consultation via WhatsApp
+                </button>
+              </form>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
 
@@ -806,7 +1187,7 @@ const About = () => {
                 <div className="text-xs text-gray-500 uppercase tracking-widest font-black">Years Experience</div>
               </div>
               <div className="p-8 bg-white/5 rounded-[32px] border border-white/5 group hover:border-blue-500/30 transition-all duration-500">
-                <div className="text-4xl font-black text-blue-500 mb-2">150+</div>
+                <div className="text-4xl font-black text-blue-500 mb-2">50+</div>
                 <div className="text-xs text-gray-500 uppercase tracking-widest font-black">Stores Optimized</div>
               </div>
             </div>
@@ -1372,7 +1753,7 @@ const StoreDesignExpertise = () => {
                 <div className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Success Rate</div>
                 <div className="text-4xl font-black text-blue-600 tracking-tighter">98%</div>
                 <div className="text-[10px] font-bold text-gray-500 mt-2 flex items-center gap-1">
-                  <CheckCircle2 size={12} className="text-emerald-500" /> Across 150+ Projects
+                  <CheckCircle2 size={12} className="text-emerald-500" /> Across 50+ Projects
                 </div>
               </motion.div>
             </motion.div>
@@ -1818,7 +2199,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-blue-200 uppercase font-bold tracking-wider">Location</div>
-                    <div className="text-lg font-bold">United Kingdom</div>
+                    <div className="text-lg font-bold">Africa</div>
                   </div>
                 </div>
               </div>
